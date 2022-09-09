@@ -24,11 +24,11 @@ class JWTAuthentication(BasicAuthentication):
       raise PermissionDenied("Invalid Token")
 
     #3. remove the Bearer from the beginning, and save just the token to a variable
-    token = header.replace('Bearer ', '')
+    token = header.replace('Bearer ', '') #replace bearer_ with empty string
 
     try:
       # 4. Attempt to decode the token
-      # - first argument is the token - second argument is the secret- third argument is the algorithm used to decode
+      # - first argument is the token - second argument is the secret- third argument is the algorithm used to decode (default)
       
       payload = jwt.decode(token, settings.SECRET_KEY, ["HS256"])
 

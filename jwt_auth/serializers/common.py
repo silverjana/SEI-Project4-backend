@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model, password_validation
 
 User = get_user_model()
 
-from rest_framework.exceptions import ValidationError # sends canned response to user for validation error
+from rest_framework.exceptions import ValidationError # sends validation error to user
 
 from django.contrib.auth.hashers import make_password 
 

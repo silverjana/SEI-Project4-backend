@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 class User(AbstractUser):
     email = models.CharField(max_length=50, unique=True)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, default = 7, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField(default=None, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
     
