@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 
+#dynamic user
 from django.contrib.auth import get_user_model
-User = get_user_model() #dynamic
+User = get_user_model() 
 
 import jwt
 from datetime import datetime, timedelta # datetime : get now as a date. timedelta: period of time as a num value. together:expiry date
