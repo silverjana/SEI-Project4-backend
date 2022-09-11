@@ -10,21 +10,23 @@ from django.contrib.contenttypes.fields import GenericRelation
 class Gender(models.TextChoices):
   female = 'female'
   male = 'male'
-  prefer_not = 'prefer not to say'
+  other = 'other'
 
 
 # Create your models here.
 class Patient(models.Model):
   name= models.CharField(max_length=50)
   date_of_birth = models.DateTimeField
-  gender = models.CharField(Gender.choices , max_length=50 )
+  gender = models.CharField(Gender.choices , max_length=10 )
   health_status = models.TextField(null=True)
   allergies = models.TextField(null=True)
   contact = models.CharField(max_length=10, null=True)
   emergency_contact = models.CharField(max_length=100, null=True)
   em_contact_relationship = models.CharField(max_length=150, null=True)
   location = models.CharField(max_length=300)
+  is_medic = models.BooleanField(default=False)
   user = GenericRelation(User)
+  
 
   def __str__(self):
     return f"{self.name}"

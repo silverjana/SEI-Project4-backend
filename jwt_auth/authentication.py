@@ -16,6 +16,7 @@ class JWTAuthentication(BasicAuthentication):
     print("HITS AUTHENTICATE MIDDLEWARE")
     header = request.headers.get('Authorization') #get
     if not header:
+      print('returns: no header')
       return None     #any req hits this and returns this if not auth. if no auth needed, everything continues normally
 
     #2. check header is valid - Is a bearer token) (ok->next)

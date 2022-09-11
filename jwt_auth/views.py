@@ -20,18 +20,23 @@ from .serializers.common import UserSerializer
 class RegisterView(APIView):
     
   def post(self, request, type): #tipe from url - /int:type 
-
+    print('HITS register/POST')
     # to save user we need content_type and  object_id 
     # content type is in variable in url - just add propety to user ( that has pw etc)
     # for object_id we need to serialize the patient/carer part, save to db ->  get id, add property to user
     # THEN serialize user
 
     try:
+      #print('type: ', type)
       
-      user = dict(request.data)  # is dict with req data
-      user['content_type'] = type # add content_type property to user
+      meta = dict(request.data)  # is dict with req data
+      print('got meta from req data')
+      user = meta.copy()
 
-      meta = user.pop('meta') # move meta from user to own var. meta is patient data (?)
+      user['content_type'] = type # add content_type property to user
+      print('added content-type to user')
+      print(meta)
+      print(user)
 
       #serialize as patient or carer
 
@@ -42,13 +47,17 @@ class RegisterView(APIView):
       else: 
         raise KeyError('invalid type')
 
+      print('meta serialized ok ')
+
       #validate 
-
       serialized_meta.is_valid() # check 
+      print('serialized meta is valid')
 
-      saved_meta = serialized_meta.save()  #save in db - NOW HAS ID
+      saved_meta = serialized_meta.save()  #save in db - #! HERE - NOT WORKING
+      print('saved meta - has id')
+
       user['object_id'] = saved_meta.id  # save object_id to user
-
+      print('object Id saved')
 
       ######### serialize user
 
