@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('jwt_auth.urls')),
     path('patients/', include('patients.urls')),
+    path('carers/', include('carers.urls')),
 ]

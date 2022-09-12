@@ -10,12 +10,16 @@ from django.contrib.auth import get_user_model
 User = get_user_model() 
 
 from patients.serializers.common import PatientSerializer
+from carers.serializers.common import CarerSerializer
 
 import jwt
 from datetime import datetime, timedelta # datetime : get now as a date. timedelta: period of time as a num value. together:expiry date
 from django.conf import settings #import settings as var - SECRET_KEY
 
 from .serializers.common import UserSerializer
+
+from rest_framework.permissions import IsAuthenticated
+from jwt_auth.serializers.populated import UserPatientSerializer, UserCarerSerializer
 
 class RegisterView(APIView):
     
@@ -56,7 +60,7 @@ class RegisterView(APIView):
       serialized_meta.is_valid(True) # check 
       print('serialized meta is valid' , serialized_meta)
 
-      saved_meta = serialized_meta.save()  #save in db - #! HERE - NOT WORKING
+      saved_meta = serialized_meta.save()  #save in db - 
       print('saved meta - has id')
 
       user['object_id'] = saved_meta.id  # save object_id to user
@@ -119,3 +123,16 @@ class LoginView(APIView):
     return Response({ "token": token, "message": f"Welcome back {user_to_login.username}" 
   })
 
+class ProfileView(APIView):
+  permission_classes = (IsAuthenticated, )
+
+  def get(self, request):
+    print(request.user)
+    print(request.user.content_type)
+    if "carer" in str(request.user.content_type):
+      serialized_user = UserCarerSerializer(request.user)
+    else:
+      serialized_user = UserPatientSerializer(request.user)
+
+    return Response(serialized_user.data)
+  #get user making the req

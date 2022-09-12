@@ -8,8 +8,8 @@ from.models import Carer
 class CarerView(APIView):
     
     #get all info about one carer
-    def get_patient(self, pk):
+    def get_carer(self, pk):
         try:
             return Carer.objects.get(pk=pk)
         except Carer.DoesNotExist:
-            raise NotFound("patient not found!")
+            raise NotFound("carer not found!")
