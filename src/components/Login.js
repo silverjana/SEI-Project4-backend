@@ -56,10 +56,10 @@ const Login = () => {
       //go to 
       navigate("/userprofile")
       setlogin(true)
-
     } catch (error) {
-      console.log(error)
-      setError(error.response.data.detail)
+      console.log('ERR', error)
+      setError(error.response.data.detail ? error.response.data.detail : error.message )
+      //setError(error.message )
     }
 
   }

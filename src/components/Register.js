@@ -9,6 +9,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+import UploadImage from "./UploadImage";
+
 import { API_URL } from '../config'
 
 import axios from "axios"
@@ -181,7 +183,8 @@ const Register = () => {
                 <FormControlLabel value="ENT" name="specialization" control={<Radio color="secondary" />} label="Otolaryngologist" />
               </RadioGroup>
 
-              <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.meta.image} onChange={handleCarerChange} />
+              {/* <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.meta.image} onChange={handleCarerChange} /> */}
+              <UploadImage name='image' setData={setCarerData} data={carerData}/>
 
               <TextField multiline rows={2} className="form-input" variant="filled" name='bio' label="About you" value={carerData.meta.bio} onChange={handleCarerChange} />
 
@@ -203,7 +206,7 @@ const Register = () => {
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='email' label="Email" value={patientData.email} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={patientData.password} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password_confirmation' label="Confirm Password" value={patientData.password_confirmation} onChange={handlePatientChange} />
-              <TextField required error={error ? true : false} className="form-input" variant="filled" name='date_of_birth' label="Date of birth" value={patientData.meta.date_of_birth} onChange={handlePatientChange} />
+              <TextField required error={error ? true : false} className="form-input" variant="filled" type ='date' name='date_of_birth' label="Date of birth" value={patientData.meta.date_of_birth} onChange={handlePatientChange} />
 
               <RadioGroup row name="row-radio-buttons-group" onChange={handlePatientChange} value={patientData.meta.gender} >
                 <FormControlLabel value="female" name="gender" control={<Radio color="secondary" />} label="Female" />

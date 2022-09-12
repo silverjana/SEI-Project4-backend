@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import API_URL from '../config.js'
+import { Button } from "@mui/material"
 
 import MyCaregiverProfile from './MyCaregiverProfile'
+import MyPatientProfile from "./MyPatientProfile.js"
 
 const UserProfile = () => {  
     //when coming back to page, scroll to top
@@ -41,9 +43,9 @@ const UserProfile = () => {
       {error && {error}}
       {userData
       ?
-      userData.content_type === 7? <p> show patient component</p> : <MyCaregiverProfile userData={userData}  />
+      userData.content_type === 7 ? <MyPatientProfile userData={userData}  /> : <MyCaregiverProfile userData={userData}  />
       :
-      <p>show login</p>
+      <p>Plerase log in to see this page <Button className='navigatebtn' href='/login'>Click here to log in</Button></p>
       }
       
       
