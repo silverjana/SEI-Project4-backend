@@ -21,6 +21,7 @@ class RegisterView(APIView):
     
   def post(self, request, type): #tipe from url - /int:type 
     print('HITS register/POST')
+    print(request.data)
     # to save user we need content_type and  object_id 
     # content type is in variable in url - just add propety to user ( that has pw etc)
     # for object_id we need to serialize the patient/carer part, save to db ->  get id, add property to user
@@ -29,9 +30,10 @@ class RegisterView(APIView):
     try:
       #print('type: ', type)
       
-      meta = dict(request.data)  # is dict with req data
+      user = dict(request.data)  # is dict with req data
       print('got meta from req data')
-      user = meta.copy()
+      meta = user.pop("meta")
+      print('USER after pop' , user)
 
       user['content_type'] = type # add content_type property to user
       print('added content-type to user')
@@ -42,34 +44,36 @@ class RegisterView(APIView):
 
       if type == 7:
         serialized_meta = PatientSerializer(data = meta)
-      # elif type == 'caregiver_model_id':
-      #   serialized_meta = CaregiverSerializer(data = meta)
+      elif type == 8:
+        serialized_meta = CarerSerializer(data = meta)
       else: 
         raise KeyError('invalid type')
 
       print('meta serialized ok ')
 
+
       #validate 
-      serialized_meta.is_valid() # check 
-      print('serialized meta is valid')
+      serialized_meta.is_valid(True) # check 
+      print('serialized meta is valid' , serialized_meta)
 
       saved_meta = serialized_meta.save()  #save in db - #! HERE - NOT WORKING
       print('saved meta - has id')
 
       user['object_id'] = saved_meta.id  # save object_id to user
       print('object Id saved')
-
+      print('USER ->' , user)
       ######### serialize user
 
       user_to_create = UserSerializer(data=user)
 
     
       user_to_create.is_valid(True) # pass request through the validate method in the serializer. If succeeds,adds the validated_data key to the user_to_create object
+      print('Validated data',user_to_create.validated_data)
       user_to_create.save() # save() then uses validated_data object to create a new user. Once successful, it will add a data key to user_to_create, which we can then send back to the user
       return Response(user_to_create.data, status=status.HTTP_202_ACCEPTED)
 
     except Exception as e:
-      print('error in registerview/post' )
+      print('error in registerview/post', e )
       return Response(e.__dict__ if e.__dict__ else str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
   
@@ -111,4 +115,7 @@ class LoginView(APIView):
       "HS256"
     )
     print("TOKEN IS HERE ->", token)
+
+    return Response({ "token": token, "message": f"Welcome back {user_to_login.username}" 
+  })
 
