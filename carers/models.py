@@ -8,7 +8,7 @@ class Carer(models.Model):
   name = models.CharField(max_length=50)
   qualification = models.CharField(max_length=50)
   specialization = models.CharField(max_length=70)
-  image = models.CharField(max_length=10, null=True, blank=True)
+  image = models.CharField(max_length=500, null=True, blank=True)
   bio = models.CharField(max_length=500, null=True, blank=True)
   education = models.CharField(max_length=150, null=True, blank=True)
   location = models.CharField(max_length=300)
