@@ -13,7 +13,7 @@ import CaregiversList from './components/CaregiversList';
 import CaregiverProfile from './components/CaregiverProfile';
 import CreateTask from './components/CreateTask';
 import SingleTask from './components/SingleTask';
-
+import UserProfile from './components/userprofile';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path="/prices" element={<Pricelist />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/users/:patientId" element={<PatientProfile />} />
           <Route path="/caregivers" element={<CaregiversList />} />
           <Route path="/caregivers/:caregiverId" element={<CaregiverProfile />} />

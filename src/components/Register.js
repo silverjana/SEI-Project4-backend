@@ -166,28 +166,28 @@ const Register = () => {
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={carerData.password} onChange={handleCarerChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password_confirmation' label="Confirm Password" value={carerData.password_confirmation} onChange={handleCarerChange} />
               <FormLabel>Qualification</FormLabel>
-              <RadioGroup required row name="row-radio-buttons-group" onChange={handleCarerChange} value={carerData.qualification}>
+              <RadioGroup required row name="row-radio-buttons-group" onChange={handleCarerChange} value={carerData.meta.qualification}>
                 <FormControlLabel value="homecare" name="qualification" control={<Radio color="secondary" />} label="Homecare" />
                 <FormControlLabel value="technician" name="qualification" control={<Radio color="secondary" />} label="Technician" />
                 <FormControlLabel value="nurse" name="qualification" control={<Radio color="secondary" />} label="Nurse" />
                 <FormControlLabel value="doctor" name="qualification" control={<Radio color="secondary" />} label="Doctor" />
               </RadioGroup>
               <FormLabel >Specialization</FormLabel>
-              <RadioGroup required row name="row-radio-buttons-group" onChange={handleCarerChange} value={carerData.specialization}>
-                <FormControlLabel value="homecare" name="gender" control={<Radio color="secondary" />} label="Homecare" />
-                <FormControlLabel value="phlebotomist" name="gender" control={<Radio color="secondary" />} label="Phlebotomist" />
-                <FormControlLabel value="x_rays" name="gender" control={<Radio color="secondary" />} label="X-rays" />
-                <FormControlLabel value="nurse" name="gender" control={<Radio color="secondary" />} label="Nurse" />
-                <FormControlLabel value="ENT" name="gender" control={<Radio color="secondary" />} label="Otolaryngologist" />
+              <RadioGroup required row name="row-radio-buttons-group" onChange={handleCarerChange} value={carerData.meta.specialization}>
+                <FormControlLabel value="homecare" name="specialization" control={<Radio color="secondary" />} label="Homecare" />
+                <FormControlLabel value="phlebotomist" name="specialization" control={<Radio color="secondary" />} label="Phlebotomist" />
+                <FormControlLabel value="x_rays" name="specialization" control={<Radio color="secondary" />} label="X-rays" />
+                <FormControlLabel value="nurse" name="specialization" control={<Radio color="secondary" />} label="Nurse" />
+                <FormControlLabel value="ENT" name="specialization" control={<Radio color="secondary" />} label="Otolaryngologist" />
               </RadioGroup>
 
-              <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.image} onChange={handleCarerChange} />
+              <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.meta.image} onChange={handleCarerChange} />
 
-              <TextField multiline rows={2} className="form-input" variant="filled" name='bio' label="About you" value={carerData.bio} onChange={handleCarerChange} />
+              <TextField multiline rows={2} className="form-input" variant="filled" name='bio' label="About you" value={carerData.meta.bio} onChange={handleCarerChange} />
 
-              <TextField className="form-input" variant="filled" name='education' label="Education" value={carerData.education} onChange={handleCarerChange} />
+              <TextField className="form-input" variant="filled" name='education' label="Education" value={carerData.meta.education} onChange={handleCarerChange} />
 
-              <TextField required error={error ? true : false} className="form-input" variant="filled" name='location' label="Area" value={carerData.location} onChange={handleCarerChange} />
+              <TextField required error={error ? true : false} className="form-input" variant="filled" name='location' label="Area" value={carerData.meta.location} onChange={handleCarerChange} />
 
               {error && <div className='error-mex'>{error}</div>}
               <input type="submit" value="Register" className='submitbtn' />

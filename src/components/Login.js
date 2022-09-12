@@ -54,7 +54,7 @@ const Login = () => {
       //put token in header for all requests, with bearer
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
       //go to 
-      //navigate("/userprofile")
+      navigate("/userprofile")
       setlogin(true)
 
     } catch (error) {
@@ -83,7 +83,7 @@ const Login = () => {
         {login && 
           <>
             <button className='btn oksubmit' onClick={handleClick}>Done! Click here to go back</button>
-            <Link className="btn oksubmit" to="/" >Or click here to go to Home</Link>
+            <Link className="btn oksubmit" href="/" >Or click here to go to Home</Link>
           </>
         }
       </form>

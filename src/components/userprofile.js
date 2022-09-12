@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import API_URL from '../config.js'
 
-const PatientProfile = () => {  
+import MyCaregiverProfile from './MyCaregiverProfile'
+
+const UserProfile = () => {  
     //when coming back to page, scroll to top
     useEffect(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -18,8 +20,10 @@ const PatientProfile = () => {
           const token = localStorage.getItem("Project4Token")
           axios.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null
 
-          const { data } = await axios.get(`http://127.0.0.1:8000/patients/`)
+          const { data } = await axios.get(`http://127.0.0.1:8000/auth/profile/`)
           setUserData(data)
+          console.log(data.content_type)
+
         } catch (error) {
           console.log(error)
           setError(error.response.data.message)
@@ -28,12 +32,22 @@ const PatientProfile = () => {
       getData()
     }, [])
 
+
+
+
   return (
     <>
-      <h1> PatientProfile: see as owner / logged in professional </h1>
+      <h1> userprofile </h1>
+      {error && {error}}
+      {userData
+      ?
+      userData.content_type === 7? <p> show patient component</p> : <MyCaregiverProfile userData={userData}  />
+      :
+      <p>show login</p>
+      }
       
       
     </>
   )
 }
-export default PatientProfile
+export default UserProfile
