@@ -22,4 +22,5 @@ urlpatterns = [
     path('auth/', include('jwt_auth.urls')),
     path('patients/', include('patients.urls')),
     path('carers/', include('carers.urls')),
+    path('tasks/', include('tasks.urls')),
 ]

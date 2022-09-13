@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from ..models import Task
+from .common import TaskSerializer
 
 from carers.serializers.common import CarerSerializer
 
-class TaskCarerSerializer(serializers.ModelSerializer): #task with possible carers
-  carers = CarerSerializer  # all carer data included
+class TaskCarerSerializer(TaskSerializer): #task with possible carers
+  possible_carers = CarerSerializer  # all carer data included

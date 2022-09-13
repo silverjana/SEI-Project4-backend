@@ -126,7 +126,7 @@ class LoginView(APIView):
 class ProfileView(APIView):
   permission_classes = (IsAuthenticated, )
 
-  def get(self, request):
+  def get_task(self, request):
     print(request.user)
     print(request.user.content_type)
     if "carer" in str(request.user.content_type):
