@@ -26,10 +26,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/userprofile" element={<UserProfile />} />
-          <Route path="/users/:patientId" element={<PatientProfile />} />
+          <Route path="/users/:userId" element={<PatientProfile />} />
           <Route path="/caregivers" element={<CaregiversList />} />
-          <Route path="/caregivers/:caregiverId" element={<CaregiverProfile />} />
-          <Route path="/tasks" element={<CreateTask />}/>
+          <Route path="/caregivers/:carerId" element={<CaregiverProfile />} />
+          <Route path="/:userId/tasks" element={<CreateTask />}/>
           <Route path="/tasks/:taskId" element={<SingleTask />}/>
           {/* <Route path="/" element={< />}/> */}
           <Route path="/*" element={<NotFound />} />
@@ -39,18 +39,7 @@ function App() {
     </div>
 
 
-
-        // <a
-        //   className="App-link"
-        //   href="#"
-        //   target="_blank"
-        //   rel="noopener noreferrer"
-        // >
-      
-        // </a>
-  
- 
-  );
+  )
 }
 
 export default App;

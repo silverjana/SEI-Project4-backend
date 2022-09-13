@@ -6,9 +6,15 @@ const MyCaregiverProfile = ({userData}) => {
   //console.log(typeof date)
   const since = date.split('T')[0]
 
+  console.log('caregiverInfo: ', info)
+
+
   return(
     <Container>
       <h2>Welcome {info.name}!</h2>
+      <Box>
+      <img src={info.image} loading="lazy" alt='profile' />
+      </Box>
       <Box>
         <h3>About you:</h3>
         <p>{info.qualification} - {info.specialization} </p>
@@ -20,7 +26,13 @@ const MyCaregiverProfile = ({userData}) => {
       </Box>
       <Box>
         <h3>your Tasks</h3>
+        {/* {info.proposed_tasks.length> 0 ?
+        <p>show tasks</p>
+        :
+        <p>There are no tasks to show</p>
+        } */}
         <Button className='navigatebtn' href='/'>Click here to go back to home</Button>
+
       </Box>
     </Container>
   )

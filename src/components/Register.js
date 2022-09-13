@@ -139,7 +139,7 @@ const Register = () => {
 
     } catch (error) {
       console.log(error)
-      setError(error.response.data)
+      setError(error.response)
     }
   }
 
@@ -207,8 +207,8 @@ const Register = () => {
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={patientData.password} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password_confirmation' label="Confirm Password" value={patientData.password_confirmation} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type ='date' name='date_of_birth' label="Date of birth" value={patientData.meta.date_of_birth} onChange={handlePatientChange} />
-
-              <RadioGroup row name="row-radio-buttons-group" onChange={handlePatientChange} value={patientData.meta.gender} >
+              <FormLabel required  id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <RadioGroup row name="row-radio-buttons-group" onChange={handlePatientChange} value={patientData.meta.gender}>
                 <FormControlLabel value="female" name="gender" control={<Radio color="secondary" />} label="Female" />
                 <FormControlLabel value="male" name="gender" control={<Radio color="secondary" />} label="Male" />
                 <FormControlLabel value="other" name="gender" control={<Radio color="secondary" />} label="Other" />

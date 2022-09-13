@@ -12,7 +12,7 @@ const UserProfile = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }, [])
 
-    const [userData, setUserData] = useState('')
+    const [userData, setUserData] = useState(null)
     const [error, setError] = useState('')
 
 
@@ -24,7 +24,7 @@ const UserProfile = () => {
 
           const { data } = await axios.get(`http://127.0.0.1:8000/auth/profile/`)
           setUserData(data)
-          console.log(data.content_type)
+          console.log('DATA', data)
 
         } catch (error) {
           console.log(error)
@@ -33,9 +33,6 @@ const UserProfile = () => {
       }
       getData()
     }, [])
-
-
-
 
   return (
     <>

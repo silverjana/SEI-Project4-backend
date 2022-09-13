@@ -58,7 +58,7 @@ const Login = () => {
       setlogin(true)
     } catch (error) {
       console.log('ERR', error)
-      setError(error.response.data.detail ? error.response.data.detail : error.message )
+      setError(error.response.data.detail ? error.response.data.detail : error.message ) //!doesn't work?
       //setError(error.message )
     }
 
