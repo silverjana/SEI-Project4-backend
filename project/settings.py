@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'patients',
     'carers',
+    'tasks',
 ]
 
 MIDDLEWARE = [

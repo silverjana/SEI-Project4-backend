@@ -1,3 +1,4 @@
+from asyncio import tasks
 from django.db import models
 
 from jwt_auth.models import User
@@ -14,6 +15,10 @@ class Carer(models.Model):
   location = models.CharField(max_length=300)
   is_medic = models.BooleanField(default=True)
   user = GenericRelation(User)
+  proposed_tasks = models.ManyToManyField(
+    'tasks.Task',
+    related_name='carers'
+  )
   
 
   def __str__(self):
