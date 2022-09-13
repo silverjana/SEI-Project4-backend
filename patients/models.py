@@ -16,7 +16,7 @@ class Gender(models.TextChoices):
 # Create your models here.
 class Patient(models.Model):
   name= models.CharField(max_length=50)
-  date_of_birth = models.DateField
+  date_of_birth = models.CharField(max_length=25)
   gender = models.CharField(Gender.choices, max_length=10 )
   health_status = models.TextField(null=True, blank=True)
   allergies = models.TextField(null=True, blank=True)
