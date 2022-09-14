@@ -36,6 +36,7 @@ class TaskDetailView(APIView):
     # delete a task
     def delete(self, request, pk):
         task_to_delete = self.get_task(pk)
+        print('taskid:', pk)
         print("task owner id ->", task_to_delete.owner)
         print("request user id ->", request.user)
 
@@ -43,8 +44,28 @@ class TaskDetailView(APIView):
             raise PermissionDenied("Unauthorised")
 
         task_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) #cant send body
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def add(self, request, pk):
+      # > b = Blog.objects.get(id=1) GET TASK
+      task = self.get_task(pk=pk)
+      # >>> e = Entry.objects.get(id=234) GET CARER ID from request?
+      print('request:', request)
+      # >>> b.entry_set.add(e) # Associates Entry e with Blog b.
+
+
+
+    def put(self, request, pk):
+        task_to_update = self.get_task(pk) 
+        updated_task = TaskCarerSerializer(task_to_update, data=request.data) # when updating: pass both existing data and req data into the serializer
+        try:
+            updated_task.is_valid(True) #validate new data
+            updated_task.save() # if valid, save 
+            return Response(updated_task.data, status=status.HTTP_202_ACCEPTED)
+        except Exception as e:
+            print(e)
+            return Response(str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class TaskListView(APIView):
