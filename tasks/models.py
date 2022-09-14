@@ -24,6 +24,7 @@ class Task(models.Model):
     on_delete=models.CASCADE,
     blank=True, 
     null=True,
+    default=None,
   )
   possible_carers = models.ManyToManyField(  # many tasks proposed to many carers
     'carers.Carer',

@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 
+from jwt_auth.serializers.populated import UserPatientSerializer
+
 from .models import Task
 from .serializers.common import TaskSerializer
 from .serializers.populated import TaskCarerSerializer
@@ -14,25 +16,27 @@ from .serializers.populated import TaskCarerSerializer
 
 class TaskDetailView(APIView):
     permission_classes = (IsAuthenticated, )
-    
+
     # get a task with id
-    def get_task(self, pk): #DRY looks for task and reports
-        
+    def get_task(self, pk):  # DRY looks for task and reports
+
         try:
             return Task.objects.get(pk=pk)
         except Task.DoesNotExist:
             raise NotFound("Review not found!")
 
     def get(self, _request, pk):
-      print('HIT GET TASK REQ')
-      task = self.get_task(pk=pk) # either return task or raise a NotFound response 
-      serialized_task = TaskCarerSerializer(task)
-      return Response(serialized_task.data)
+        print('HIT GET TASK ')
+        # either return task or raise a NotFound response
+        task = self.get_task(pk=pk)
+        serialized_task = TaskCarerSerializer(task)
+        print(task)
+        return Response(serialized_task.data)
 
-    #delete a task
+    # delete a task
     def delete(self, request, pk):
         task_to_delete = self.get_task(pk)
-        print("task owner id ->", task_to_delete.owner )
+        print("task owner id ->", task_to_delete.owner)
         print("request user id ->", request.user)
 
         if task_to_delete.owner != request.user:
@@ -49,10 +53,14 @@ class TaskListView(APIView):
     # post a review
     def post(self, request):
         # posting-> no request to the db
-        print(request)
+        print(request.data)
+
+        serialized_user = UserPatientSerializer(request.user)
+        
+        request.data['owner'] = dict(serialized_user.data)['content_object']['id']
 
         task_to_create = TaskSerializer(data=request.data)
-        
+
         try:
             task_to_create.is_valid(True)
 
