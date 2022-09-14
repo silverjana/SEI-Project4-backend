@@ -13,7 +13,8 @@ import CaregiversList from './components/CaregiversList';
 import CaregiverProfile from './components/CaregiverProfile';
 import CreateTask from './components/CreateTask';
 import SingleTask from './components/SingleTask';
-import UserProfile from './components/userprofile';
+import UserProfile from './components/UserProfile';
+import UpdateTask from './components/UpdateTask'
 
 function App() {
   return (
@@ -29,8 +30,9 @@ function App() {
           <Route path="/users/:userId" element={<PatientProfile />} />
           <Route path="/caregivers" element={<CaregiversList />} />
           <Route path="/caregivers/:carerId" element={<CaregiverProfile />} />
-          <Route path="/:userId/tasks" element={<CreateTask />}/>
-          <Route path="/tasks/:taskId" element={<SingleTask />}/>
+          <Route path="/:patientId/tasks" element={<CreateTask />}/>
+          <Route path="/tasks/:patientId/:taskId" element={<SingleTask />}/>
+          <Route path="/tasks/:patientId/:taskId/update" element={<UpdateTask />}/>
           {/* <Route path="/" element={< />}/> */}
           <Route path="/*" element={<NotFound />} />
         </Routes>

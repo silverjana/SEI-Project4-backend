@@ -77,9 +77,9 @@ const Login = () => {
         <FormControlLabel value="8" name="type" control={<Radio color="secondary" />} label="Healthcare Professional" />
       </RadioGroup> */ }
         {error && <div className='error-mex'>{error}</div>}
-        <TextField required error={error ? true : false} className="form-input" variant="filled" name='email' label="Email" value={userData.email} onChange={handleChange} />
-        <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={userData.password} onChange={handleChange} />
-        <Button variant="outlined" type='submit' className='submitbtn' >Login</Button>
+        <TextField required error={error ? true : false} className="form-input" variant="standard" name='email' label="Email" value={userData.email} onChange={handleChange} />
+        <TextField required error={error ? true : false} className="form-input" variant="standard" type="password" name='password' label="Password" value={userData.password} onChange={handleChange} />
+        <button type='submit' className='submitbtn' >Login</button>
         {login && 
           <>
             <button className='btn oksubmit' onClick={handleClick}>Done! Click here to go back</button>

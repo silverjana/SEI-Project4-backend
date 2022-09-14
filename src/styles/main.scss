@@ -1,0 +1,85 @@
+
+//  ---- FORMS  --- 
+
+// -- auth --
+
+.registerPage{
+  background-color: beige;
+}
+
+.authform{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(230, 248, 249);
+  div{
+    margin: 4px 0;
+  }
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  max-width: 60vw;
+  
+}
+
+.submitbtn{
+  margin:20px 0 50px;
+}
+
+// --- CARER LIST ---
+
+.carerList{
+  max-width: 90%;
+  display:flex;
+  flex-wrap: wrap;
+  background-color: azure;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.carersDiv{
+  max-width: 30%;
+  background-color: antiquewhite;
+  max-height: fit-content;
+  margin-bottom: 20px;
+}
+.card{ 
+  min-height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  p{
+    margin: 0;
+    padding: 10px;
+    line-height: 1.5;
+  }
+}
+.cardImg{
+  max-width: 100%;
+}
+
+// --- FOOTER ---
+
+footer {
+  position: fixed;
+  max-height: 100px;
+  bottom: 0;
+  width: 100vw;
+  background-color: rgb(217, 92, 255);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+
+  p {
+    align-self: center;
+    margin: 10px;
+    color: #d5d5d5;
+
+    a {
+      color: rgb(252, 254, 209);
+    }
+  }
+}

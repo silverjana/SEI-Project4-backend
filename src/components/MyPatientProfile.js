@@ -1,6 +1,9 @@
 import { Container, Button, Box } from '@mui/material'
 import axios from 'axios'
 import { useEffect } from 'react'
+import {LinearProgress} from '@mui/material'
+import { Card } from 'react-bootstrap'
+import { Link } from "react-router-dom"
 
 const MyPatientProfile = ({ userData }) => {
   const { content_object: info } = userData
@@ -15,8 +18,10 @@ const MyPatientProfile = ({ userData }) => {
 
   //delete Task
   const deleteTask = async (taskId) => {
+    console.log('hits delete')
 
     try {
+      
       await axios.delete(`http://127.0.0.1:8000/tasks/${taskId}`)
 
       function refreshPage() {
@@ -49,14 +54,38 @@ const MyPatientProfile = ({ userData }) => {
         {info.tasks.length > 0
           ?
           <>
-            <p>show tasks</p>
-            <Button className='navigatebtn' onClick={deleteTask}>delete task - send taskId</Button>
+            {info.tasks.map(task => {
+              const {id, start_date, status, frequency, treatment} = task
+              return (
+                id 
+                ?
+                <div className='taskDiv' key={id}>
+                <Link to={`/tasks/${info.id}/${id}`} >
+                  <Card className="my-tasks-card">
+                    <Card.Body>
+                      <Card.Title className="card-title">{status} Task: {treatment}</Card.Title>
+                      <Card.Text className="card-text">When: {frequency} starting from {start_date} <br /> <span>Click for more</span> </Card.Text>
+                      
+                    </Card.Body>
+                  </Card>
+                </Link>
+                <button className='deletebtn' onClick={() => deleteTask(id)}>delete this task</button>
+                </div>
+                
+                :
+                <LinearProgress color="success" />
+              
+              )
+            })}
+
+            <Button className='deletebtn' onClick={deleteTask}>delete task - send taskId</Button>
           </>
           :
           <p>There are no tasks to show</p>
         }
 
-        <Button className='navigatebtn' href={`${userData.id}/tasks`}>Create new task</Button>
+        <Button className='navigatebtn' href={`${info.id}/tasks`}>Create new task</Button> 
+        {/* Create new task with patient id! */}
 
 
       </Box>

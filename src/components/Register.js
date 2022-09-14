@@ -31,7 +31,7 @@ const Register = () => {
 
   //get / set patient data values
   const [patientData, setPatientData] = useState({
-    //rrquired
+    //required
     username: "",
     email: "",
     password: "",
@@ -88,6 +88,11 @@ const Register = () => {
 
   //  --  CAREGIVER  --  
 
+    //--- import picture from upload --
+
+    const [imageData, setImageData] = useState('')
+    console.log('imagedata:', imageData)
+
   //get / set patient data values
   const [carerData, setCarerData] = useState({
     //required
@@ -97,10 +102,10 @@ const Register = () => {
     password_confirmation: "",
     meta: {
       name: "",
-      qualification: "", //enum technician/nurse/doctor/homecare
+      qualification: "", //enum 
       specialization: "", //enum
       //nullable:
-      image: "",
+      image: imageData.image,
       bio: "",
       education: "",
 
@@ -130,9 +135,9 @@ const Register = () => {
 
   const onCarerSubmit = async (event) => {
     event.preventDefault()
-    console.log('submitted carer', carerData)
     try {
       //API req POST to register
+      console.log('carer data just before sending',carerData)
       await axios.post(`http://127.0.0.1:8000/auth/register/${type}/`, carerData)
       //go to 
       navigate("/login")
@@ -150,8 +155,10 @@ const Register = () => {
 
 
 
+
+
   return (
-    <Box className="FormPage">
+    <Box className="registerPage">
       <h1> register </h1>
       <Button variant="outlined" color="secondary" value='7' onClick={changeType}>User</Button>
       <Button variant="outlined" color="secondary" value='8' onClick={changeType}>healthcare professional</Button>
@@ -184,7 +191,8 @@ const Register = () => {
               </RadioGroup>
 
               {/* <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.meta.image} onChange={handleCarerChange} /> */}
-              <UploadImage name='image' setData={setCarerData} data={carerData}/>
+              
+              <UploadImage name='image' setImageData={setImageData} data={imageData}/>
 
               <TextField multiline rows={2} className="form-input" variant="filled" name='bio' label="About you" value={carerData.meta.bio} onChange={handleCarerChange} />
 
@@ -200,7 +208,7 @@ const Register = () => {
         :
         <Container className="authform"><h2>User Registration</h2>
           <form className="form" onSubmit={onPatientSubmit}>
-            <Stack spacing={2}>
+            <Stack>
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='name' label="Name" value={patientData.meta.name} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='username' label="Username" value={patientData.meta.username} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='email' label="Email" value={patientData.email} onChange={handlePatientChange} />
@@ -223,7 +231,7 @@ const Register = () => {
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='location' label="Address - city and neighbourhood" value={patientData.meta.location} onChange={handlePatientChange} />
 
               {error && <div className='error-mex'>{error}</div>}
-              <Button variant="outlined" type='submit' className='submitbtn' >Register</Button>
+              <button type='submit' className='submitbtn' >Register</button>
             </Stack>
           </form>
         </Container>

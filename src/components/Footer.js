@@ -3,7 +3,7 @@ import { Box, Container } from "@mui/system"
 const Footer = () => {
   return (
 
-    <Box component="footer" className="fixed-bottom" >
+    <Box component="footer" >
 
       <Container>
         <p>Created by

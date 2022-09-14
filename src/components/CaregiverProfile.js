@@ -10,7 +10,7 @@ const CaregiverProfile = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
 
-  const { pk } = useParams()
+  const { carerId } = parseInt(useParams())
 
   const [userData, setUserData] = useState(null)
   const [error, setError] = useState('')
@@ -22,7 +22,7 @@ const CaregiverProfile = () => {
         const token = localStorage.getItem("Project4Token")
         axios.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null
 
-        const { data } = await axios.get(`http://127.0.0.1:8000/carers/${pk}`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/carers/${carerId}/`)
         setUserData(data)
         console.log('DATA', data)
 

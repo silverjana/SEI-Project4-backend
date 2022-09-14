@@ -3,10 +3,10 @@ import { Container, Button, Box } from '@mui/material'
 const MyCaregiverProfile = ({userData}) => {
   const {content_object: info} = userData
   const date = userData.date_joined
-  //console.log(typeof date)
+  console.log(info)
   const since = date.split('T')[0]
 
-  console.log('caregiverInfo: ', info)
+  //console.log('caregiverInfo: ', info)
 
 
   return(
@@ -26,11 +26,11 @@ const MyCaregiverProfile = ({userData}) => {
       </Box>
       <Box>
         <h3>your Tasks</h3>
-        {/* {info.proposed_tasks.length> 0 ?
+        {info.proposed_tasks.length> 0 ?
         <p>show tasks</p>
         :
         <p>There are no tasks to show</p>
-        } */}
+        }
         <Button className='navigatebtn' href='/'>Click here to go back to home</Button>
 
       </Box>
