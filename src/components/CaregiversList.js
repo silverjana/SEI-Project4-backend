@@ -8,8 +8,8 @@ import catDoctor from '../images/catDoctor.jpeg'
 //? Filter
 import CarersFilters from './CarersFilters.js'
 
-const CaregiversList = ({isOwner, taskData, onAssign}) => {
-
+const CaregiversList = ({isOwner, taskData, onPropose}) => {
+ //! removed onAssign from {}
   // DO NOT SCROLL TO TOP
 
   const [carersData, setCarersData] = useState(null)
@@ -64,8 +64,9 @@ const [ filters, setFilters ] = useState({
                   <Card.Body>
                     <img className="cardImg" loading="lazy" src={image ? image : catDoctor} alt={name} />
                     <Card.Text className="card-text">{name}, {location} <br /> {qualification} - {specialization} </Card.Text>
-                    {isOwner && isOwner === taskData.owner && <button className='deletebtn' value={id} onClick={onAssign}>assign Task</button>
-                      }                    
+                    {/* {isOwner && isOwner === taskData.owner && <button className='deletebtn' value={id} onClick={onAssign}>assign Task</button>}  */}
+                    {isOwner && isOwner === taskData.owner && <button className='taskbtn' value={id} onClick={onPropose}>Propose Task</button>}                    
+
                   </Card.Body>
                 </Card>
               </Link>
