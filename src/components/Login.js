@@ -8,19 +8,14 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {Link} from '@mui/material'
 
+import { setToken } from '../helpers/auth'
+
 const Login = () => {
   //when coming back to page, scroll to top
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
 
-  // //select which user to register as
-  // const [type, setType] = useState(parseInt('7'))
-
-  // const changeType = event => {
-  //   setType(parseInt(event.target.value))
-  //   console.log(type)
-  // }
 
   const navigate = useNavigate()
 
@@ -50,7 +45,7 @@ const Login = () => {
       //token is in the response
       const { token } = res.data
       //set in local storage
-      localStorage.setItem("Project4Token", token)
+      setToken(token)
       //put token in header for all requests, with bearer
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
       //go to 

@@ -13,7 +13,8 @@ const CreateTask = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
 
-  //get patient id as owner
+  //get patient id 
+  const {patientId} = useParams()
 
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -52,7 +53,7 @@ const CreateTask = () => {
       console.log(res)
       const taskId = res.data.id
       //setTimeout(navigate(`/tasks/${taskId}`), 5000)
-      navigate(`/tasks/${taskId}`)
+      navigate(`/tasks/${patientId}/${taskId}`)
 
 
     } catch (error) {

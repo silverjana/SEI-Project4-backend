@@ -10,7 +10,7 @@ const CaregiverProfile = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
 
-  const { carerId } = parseInt(useParams())
+  const { carerId } = useParams()
 
   const [userData, setUserData] = useState(null)
   const [error, setError] = useState('')
@@ -36,8 +36,13 @@ const CaregiverProfile = () => {
 
   return (
     <>
-      <h1> see caregiver profile as logged in user ( any) (possible to have only logged in is_medical?) </h1>
-      {userData && <p>DATA IS HERE!</p>}
+      <h1> see caregiver profile as logged in user ( any) </h1>
+      {error && <p>{error}</p>}
+      {userData 
+      ? 
+      <p>DATA IS HERE!</p> 
+      :
+      <p>Loading...</p>}
     </>
   )
 }

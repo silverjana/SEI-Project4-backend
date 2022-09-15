@@ -8,8 +8,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Slider from "@mui/material/Slider"
-import TextareaAutosize from "@mui/material/TextareaAutosize"
+
 import Box from "@mui/material/Box"
 import { useParams } from "react-router-dom"
 
@@ -32,8 +31,9 @@ const UpdateTask = () => {
     start_date: "",
     frequency: "",
     treatment: "",
-    status: 'new',
-
+    status: "",
+    owner: "",
+    possible_carers: "",
   })
 
   const navigate = useNavigate()
@@ -77,9 +77,9 @@ const UpdateTask = () => {
       console.log("old data", oldData)
       const oldTask = await oldData
       console.log('oldtask', oldTask)
-      const { description, start_date, frequency, treatment } = await oldTask
+      const { description, start_date, frequency, treatment, owner, status, possible_carers} = await oldTask
       //console.log(title)
-      setData({ description, start_date, frequency, treatment })
+      setData({ description, start_date, frequency, treatment, owner, status, possible_carers})
     }
     setplaceholder();
   }, [oldData])
@@ -92,7 +92,7 @@ const UpdateTask = () => {
 
     try {
       // API request -> Put req
-    const res = await axios.put(`http://127.0.0.1:8000/tasks/${taskId}`, data)
+    const res = await axios.put(`http://127.0.0.1:8000/tasks/${taskId}/`, data)
   
     //save the response
     setMessage(res.data)
@@ -114,7 +114,7 @@ const UpdateTask = () => {
   return (
     <>
       <Container className="authform">
-        <h1> create a new task as a logged in patient </h1>
+        <h1> Edit task </h1>
         <form className="form" onSubmit={onSubmit}>
           {error && <div className='error-mex'>{error}</div>}
           <TextField multiline error={error ? true : false} rows={3} className="form-input" variant="filled" name='description' label="Description" value={data.description} onChange={handleChange} />

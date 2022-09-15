@@ -4,6 +4,11 @@ import axios from "axios"
 import API_URL from '../config.js'
 import { Box } from "@mui/material"
 import { Button } from "react-bootstrap"
+import {LinearProgress} from "@mui/material"
+
+import { getToken, getPayload } from '../helpers/auth'
+
+import CaregiversList from "./CaregiversList.js"
 
 const SingleTask = () => {
 
@@ -11,13 +16,18 @@ const SingleTask = () => {
 
   const [taskData, setTaskData] = useState(null)
   const [error, setError] = useState('')
-  let isOwner = false
+  const [isOwner, setIsOwner] = useState(null)
 
+  useEffect(() => {
+  const payload = getPayload()
+  //console.log('payload:', payload)
+  setIsOwner(payload.user)
+  })
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const token = localStorage.getItem("Project4Token")
+        const token = getToken()
         axios.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null
 
         const { data } = await axios.get(`http://127.0.0.1:8000/tasks/${taskId}/`)
@@ -32,28 +42,17 @@ const SingleTask = () => {
     getData()
   }, [taskId])
 
-  useEffect(() => {
-    async function getOwner() {
-      const owner = await taskData.owner
-      if (patientId === await owner) {
-        isOwner = true
-      }
-    }
-    getOwner()
-  }, [])
 
   //! assign carer to task
   const [message, setMessage] = useState('')
 
   const onAssign = async (event) => {
-
     event.preventDefault()
-    console.log(event)
-
+    const req =  event.target.value
+    console.log(req)
     try {
       // API request -> Put req
-      const res = await axios.add(`http://127.0.0.1:8000/tasks/${taskId}`, event.data)
-
+      const res = await axios.put(`http://127.0.0.1:8000/tasks/assign/${taskId}/`, {id: req})
       //save the response
       setMessage(res.data)
       console.log(" res ", res.data)
@@ -72,8 +71,8 @@ const SingleTask = () => {
       {taskData
         ?
         <>
-          <Button className='navigatebtn' href={`/tasks/${patientId}/${taskId}/update`} >Edit task</Button>
-          <Button className='deletebtn' onClick={onAssign}>assign Task</Button>
+          
+          <Button className='deletebtn' id='5' onClick={onAssign}>assign Task until other stuff works</Button>
           <Box>
             <p>{taskData.status} task created on {taskData.created_at.split('T')[0]}. <br />
               Service required: {taskData.treatment} - {taskData.frequency} <br />
@@ -81,16 +80,18 @@ const SingleTask = () => {
               assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
               {isOwner && taskData.possible_carers > 0 ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</p>
           </Box>
-          {isOwner &&
+          {isOwner === taskData.owner &&
             <>
-              <p> show list of carers to assign</p>
               <Button className='navigatebtn' href={`/tasks/${patientId}/${taskId}/update`} >Edit task</Button>
+              
+              <CaregiversList  isOwner={isOwner} taskData={taskData} onAssign={onAssign}/>
+              
             </>
           }
 
         </>
         :
-        <p>loading...</p>
+        <LinearProgress color="success" />
       }
       {error && <p>{error}</p>}
 

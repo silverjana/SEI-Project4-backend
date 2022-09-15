@@ -5,7 +5,10 @@ import { Card, Container } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 import catDoctor from '../images/catDoctor.jpeg'
 
-const CaregiversList = () => {
+//? Filter
+import CarersFilters from './CarersFilters.js'
+
+const CaregiversList = ({isOwner, taskData, onAssign}) => {
 
   // DO NOT SCROLL TO TOP
 
@@ -30,32 +33,46 @@ const CaregiversList = () => {
     getData()
   }, [])
 
+//! FILTER ---
+
+const [ filteredCarers, setFilteredCarers ] = useState([])
+
+const [ filters, setFilters ] = useState({
+  searchLocation: '',
+  specialization:'All',
+})
+
+
   return (
     <>
-      <h1> see all caregivers in a list OK + search options</h1>
-      <Container className="carerList">
+      <h1> see all caregivers in a list OK + search options (WIP)</h1>
+      
       {error && <p>{error}</p>}
-      {carersData
+
+      {carersData && <CarersFilters filters={filters} setFilters={setFilters} carersData={carersData} setFilteredCarers={setFilteredCarers}  />}
+      <Container className="carerList">
+      {filteredCarers
         ?
         <>
-          {carersData.map(carer => {
+        {/* Changed carersData with filteredCarers.map !! */}
+          {filteredCarers.map(carer => {
             const { id, name, qualification, specialization, location, image } = carer
             return (
-              <div className="carersDiv">
-              <Link to={`/caregivers/${id}`} key={id} >
+              <div className="carersDiv"  key={id}>
+              <Link to={`/caregivers/${id}`} >
                 <Card className="carers-card">
                   <Card.Body>
                     <img className="cardImg" loading="lazy" src={image ? image : catDoctor} alt={name} />
-                    <Card.Text className="card-text">{name},{location} <br /> {qualification} - {specialization} </Card.Text>
+                    <Card.Text className="card-text">{name}, {location} <br /> {qualification} - {specialization} </Card.Text>
+                    {isOwner && isOwner === taskData.owner && <button className='deletebtn' value={id} onClick={onAssign}>assign Task</button>
+                      }                    
                   </Card.Body>
                 </Card>
-
               </Link>
               </div>
             )
           })}
         </>
-        
         :
         <LinearProgress color="secondary" />
       }
