@@ -111,7 +111,9 @@ class LoginView(APIView):
       # 1st argument: payload
       {
         "sub": user_to_login.id,
-        "exp": int(dt.strftime('%s'))    # dt time transformed in seconds and then integer
+        "exp": int(dt.strftime('%s')),
+        "user": user_to_login.object_id  # patient or carer id
+          
       },
       #2nd argument: secret -> settings var
       settings.SECRET_KEY,
