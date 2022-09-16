@@ -42,7 +42,7 @@ const MyCaregiverProfile = ({ userData }) => {
     <section className='myProfile'>
       <h2>Welcome {info.name}!</h2>
       
-      {info.image && <img src={info.image} loading="lazy" alt='profile' />  }
+      {info.image && <img src={info.image} loading="lazy" alt='profile' className='carerImg'/>  }
       
       <Box>
         <h4>About you:</h4>

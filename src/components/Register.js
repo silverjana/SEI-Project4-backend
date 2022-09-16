@@ -15,6 +15,8 @@ import { API_URL } from '../config'
 
 import axios from "axios"
 
+
+
 const Register = () => {
 
   const navigate = useNavigate()
@@ -105,7 +107,7 @@ const Register = () => {
       qualification: "", //enum 
       specialization: "", //enum
       //nullable:
-      image: imageData.image,
+      image: "",
       bio: "",
       education: "",
 

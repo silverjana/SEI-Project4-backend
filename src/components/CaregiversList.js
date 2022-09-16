@@ -10,7 +10,7 @@ import catDoctor from '../images/catDoctor.jpeg'
 //? Filter
 import CarersFilters from './CarersFilters.js'
 
-const CaregiversList = ({isOwner, taskData, onPropose}) => {
+const CaregiversList = ({owner, taskData, onPropose}) => {
  //! removed onAssign from {}
   // DO NOT SCROLL TO TOP
 
@@ -52,8 +52,8 @@ const CaregiversList = ({isOwner, taskData, onPropose}) => {
   return (
     <section className="carerPage">
       <h2> Our Healthcare team: </h2>
-      {!isOwner && <Link className='navigatebtn' to="/">Back to Home</Link>}
-      {error && <p>{error}</p>}
+      <Link className='navigatebtn' to="/">Back to Home</Link>
+      {/* {error && <p>{error}</p>} */}
 
       {carersData && <CarersFilters filters={filters} setFilters={setFilters} carersData={carersData} setFilteredCarers={setFilteredCarers}  />}
       <Container className="carerList">
@@ -71,7 +71,7 @@ const CaregiversList = ({isOwner, taskData, onPropose}) => {
                     <img className="cardImg" loading="lazy" src={image ? image : catDoctor} alt={name} />
                     <Card.Text className="card-text">{name}, {location} <br /> {qualification} - {specialization} </Card.Text>
                     {/* {isOwner && isOwner === taskData.owner && <button className='deletebtn' value={id} onClick={onAssign}>assign Task</button>}  */}
-                    {isOwner && isOwner === taskData.owner && <button className='taskbtn' value={id} onClick={onPropose}>send request</button>}                    
+                    {owner && owner === taskData.owner && <button className='taskbtn' value={id} onClick={onPropose}>send request</button>}                    
 
                   </Card.Body>
                 </Card>

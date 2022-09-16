@@ -5,6 +5,8 @@ import API_URL from '../config.js'
 
 import { Box } from "@mui/material"
 
+import catDoctor from '../images/catDoctor.jpeg'
+
 const CaregiverProfile = () => {  
   //when coming back to page, scroll to top
   useEffect(() => {
@@ -35,38 +37,47 @@ const CaregiverProfile = () => {
     getData()
   }, [])
 
-//   return (
-// <>
-//       {userData
-//         ?
-//         <section className="taskPage">
+  const navigate = useNavigate()
+
+    //go back
+    const handleClick = () => {
+      navigate(-1)
+    }
+
+  return (
+<>
+      {userData
+        ?
+        <section className="taskPage">
           
-//           <Box>
-//             <h4><span>}{userData.na}</span> <br />
-//               Service required: {taskData.treatment} - {taskData.frequency} <br />
-//               Description: {taskData.description} <br />
-//               assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
-//               {isOwner && taskData.possible_carers.length > 0 && !taskData.assigned_carer ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
-//           </Box>
-//           {isOwner === taskData.owner &&
-//             <>
-//               <div className="btnGroup">
-//                 <button className='navigatebtn' onClick={handleClick}>Go back</button>
-//                 <Link className='navigatebtn' to={`/tasks/${patientId}/${taskId}/update`} >Edit task</Link>
-//               </div>
-//               <CaregiversList  isOwner={isOwner} taskData={taskData} onPropose ={onPropose}/>
-//               {/* <CaregiversList  isOwner={isOwner} taskData={taskData} onAssign={onAssign}/> */}
+          <Box className="carerInfo">
+            <h4><span>{userData.name}</span> 
+            <img className="carerImg" loading="lazy" src={userData.image ? userData.image : catDoctor} alt={'profile'} /> <br />
+              {userData.location} <br />
+              Qualification: {userData.qualification} <br />
+              Specialization: {userData.specialization}<br />
+              {userData.education && userData.education} <br /> 
+              {userData.bio && userData.bio} <br /> 
               
-//             </>
-//           }
+              </h4>
+          </Box>
+          
+            <>
+              <div className="btnGroup">
+                <button className='navigatebtn' onClick={handleClick}>Go back</button>
+                
+              </div>
 
-//         </section>
-//         :
-//         <LinearProgress color="success" />
-//       }
-//       {error && <p>{error}</p>}
+            </>
+          
 
-//     </>
-//   )
+        </section>
+        :
+        <p>Loading...</p>
+      }
+      {error && <p>{error}</p>}
+
+    </>
+  )
 }
 export default CaregiverProfile

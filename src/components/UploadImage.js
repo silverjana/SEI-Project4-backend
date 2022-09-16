@@ -1,36 +1,43 @@
 import { useState } from "react"
 import { Container, FormGroup } from "react-bootstrap"
 
-const UploadImage = ({setCarerData, carerData}) => {
+const UploadImage = ({ setCarerData, carerData }) => {
 
   const [loading, setLoading] = useState(false)
 
   const Upload = async (e) => {
     const files = e.target.files
     const formData = new FormData()
-    formData.append( "file", files[0])
+    formData.append("file", files[0])
     formData.append("upload_preset", "hx03oalz")
     setLoading(true)
-    const res = await fetch ("https://api.cloudinary.com/v1_1/silverjana/image/upload",
-    {
-      method: "POST",
-      body: formData,
-    }
+    const res = await fetch("https://api.cloudinary.com/v1_1/silverjana/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
     )
 
     const File = await res.json()
     console.log('secure url', File.secure_url)
-    
-    setCarerData({ ...carerData, image: File.secure_url })
+
+    setCarerData({
+      ...carerData,
+      meta: {
+        ...carerData.meta,
+        image: File.secure_url
+      },
+    })
+
     setLoading(false)
   }
-  return ( <div>
+  return (<div>
     <Container>
       <h5>Upload image</h5>
       <FormGroup>
         <input type="file" name="file" placeholder="Upload image here" onChange={Upload} />
         <br />
-        {loading ? (<h3>Loading...</h3>) : carerData ? <img src={carerData.image} style={{width: "200px"}} alt=''/> : <p></p>}
+        {loading ? (<h3>Loading...</h3>) : carerData ? <img src={carerData.meta.image} style={{ width: "200px" }} alt='' /> : <p></p>}
       </FormGroup>
     </Container>
   </div>)

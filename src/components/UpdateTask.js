@@ -134,7 +134,7 @@ const UpdateTask = () => {
             <FormControlLabel value="nurse" name="treatment" control={<Radio color="secondary" />} label="Nurse" />
             <FormControlLabel value="ENT" name="treatment" control={<Radio color="secondary" />} label="Ears, nose and throat" />
           </RadioGroup>
-          <Button variant="outlined" type='submit' className='submitbtn'>Update</Button>
+          <button type='submit' className='submitbtn' >Update</button>
           {message && <button className='okmessage'>{message}</button>}
         </form>
       </Container>

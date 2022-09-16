@@ -4,7 +4,7 @@ import axios from "axios"
 import API_URL from '../config.js'
 import { Box } from "@mui/material"
 
-import {LinearProgress} from "@mui/material"
+import { LinearProgress } from "@mui/material"
 import { Link } from "react-router-dom"
 
 
@@ -19,14 +19,14 @@ const SingleTask = () => {
 
   const [taskData, setTaskData] = useState(null)
   const [error, setError] = useState('')
-  const [isOwner, setIsOwner] = useState(null)
+  const [owner, setOwner] = useState(null)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-  const payload = getPayload()
-  //console.log('payload:', payload)
-  setIsOwner(payload.user)
+    const payload = getPayload()
+    //console.log('payload:', payload)
+    setOwner(payload.user)
   }, [])
 
   useEffect(() => {
@@ -81,14 +81,14 @@ const SingleTask = () => {
   const onPropose = async (event) => {
     event.preventDefault()
 
-  
 
-    const req =  event.target.value
-    console.log('carerid ',req)
+
+    const req = event.target.value
+    console.log('carerid ', req)
     console.log('taskid:', taskId)
     try {
       // API request -> Put req
-      const res = await axios.put(`http://127.0.0.1:8000/tasks/propose/${taskId}/`, {id: req})
+      const res = await axios.put(`http://127.0.0.1:8000/tasks/propose/${taskId}/`, { id: req })
       //save the response
       setMessage(res.data)
       console.log(" res ", res.data)
@@ -102,30 +102,31 @@ const SingleTask = () => {
     }
   }
 
-  
+
 
   return (
     <>
       {taskData
         ?
         <section className="taskPage">
-          
+
           <Box>
             <h4><span>{taskData.status} task created on {taskData.created_at.split('T')[0]}.</span> <br />
               Service required: {taskData.treatment} - {taskData.frequency} <br />
               Description: {taskData.description} <br />
-              assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
-              {isOwner && taskData.possible_carers.length > 0 && !taskData.assigned_carer ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
+              assigned carer: {taskData.assigned_carer ? taskData.assigned_carer.name : 'still unassigned'} <br /> 
+              {getPayload().user === taskData.owner && !taskData.assigned_carer && (taskData.possible_carers.length > 0 ? 'Somone will shortly answer to your request!' : 'Start sending requests!')} </h4>
           </Box>
-          {isOwner === taskData.owner &&
+          {getPayload().user === taskData.owner &&
             <>
               <div className="btnGroup">
                 <button className='navigatebtn' onClick={handleClick}>Go back</button>
                 <Link className='navigatebtn' to={`/tasks/${patientId}/${taskId}/update`} >Edit task</Link>
               </div>
-              <CaregiversList  isOwner={isOwner} taskData={taskData} onPropose ={onPropose}/>
+              <CaregiversList owner={getPayload().user} taskData={taskData} onPropose={onPropose} />
+
               {/* <CaregiversList  isOwner={isOwner} taskData={taskData} onAssign={onAssign}/> */}
-              
+
             </>
           }
 
