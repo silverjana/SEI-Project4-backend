@@ -40,10 +40,10 @@ const MyPatientProfile = ({ userData }) => {
       ?
       
       <>
-        <Container >
+        <section className='myProfile'>
           <h2>Welcome {info.name}!</h2>
           <Box>
-            <h3>About you:</h3>
+            <h4>About you:</h4>
             <p>{info.date_of_birth} - {info.gender} </p>
             <p>Location: {info.location}</p>
             {info.health_status && <p>Health status: {info.health_status}</p>}
@@ -55,7 +55,7 @@ const MyPatientProfile = ({ userData }) => {
           </Box>
 
           <Box>
-            <h3>Your Tasks:</h3>
+            <h4>Your Tasks:</h4>
             {info.tasks.length > 0
               ?
               <>
@@ -70,11 +70,11 @@ const MyPatientProfile = ({ userData }) => {
                             <Card.Body>
                               <Card.Title className="card-title">{status} Task: {treatment}</Card.Title>
                               <Card.Text className="card-text">When: {frequency} starting from {start_date} <br /> <span>Click for more</span> </Card.Text>
-
+                              <button className='deletebtn' onClick={() => deleteTask(id)}>delete this task</button>
                             </Card.Body>
                           </Card>
                         </Link>
-                        <button className='deletebtn' onClick={() => deleteTask(id)}>delete this task</button>
+                        
                       </div>
 
                       :
@@ -88,13 +88,13 @@ const MyPatientProfile = ({ userData }) => {
               :
               <p>There are no tasks to show</p>
             }
+            <Link className='navigatebtn' to={`/${info.id}/tasks`} >Create new task</Link>
 
-            <Button className='navigatebtn' href={`${info.id}/tasks`}>Create new task</Button>
             {/* Create new task with patient id! */}
 
 
           </Box>
-        </Container >
+        </section >
       </>
       :
       <LinearProgress color="success" />

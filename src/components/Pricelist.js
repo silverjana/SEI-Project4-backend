@@ -1,16 +1,15 @@
 import { Button, Container } from "@mui/material"
 import * as React from 'react'
-
+import { Link } from "react-router-dom"
 
 
 const Pricelist = () => {
 
   return (
-    <Container>
-      <h1> Pricelist: 1 chocolate bar/h </h1>
+    <section className="pricesPage">
+      <h2>Pricelist</h2>
       
-        <table class="table table-hover">
-        <caption>Pricelist</caption>
+      <table className="table">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -39,12 +38,17 @@ const Pricelist = () => {
               <td>Blood sample collection</td>
               <td>from 40£/visit</td>
             </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>Doctor</td>
+              <td>from 50£/visit</td>
+            </tr>
           </tbody>
         </table>
 
-        <Button variant="outlined" type='submit' className='navigatebtn' href="/">Back to Home</Button>
+        <Link className='navigatebtn' to="/">Back to Home</Link>
 
-    </Container>
+    </section>
   )
 }
 export default Pricelist

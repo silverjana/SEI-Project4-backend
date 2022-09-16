@@ -91,7 +91,7 @@ const Register = () => {
     //--- import picture from upload --
 
     const [imageData, setImageData] = useState('')
-    console.log('imagedata:', imageData)
+    console.log('image:', imageData.image)
 
   //get / set patient data values
   const [carerData, setCarerData] = useState({
@@ -158,14 +158,15 @@ const Register = () => {
 
 
   return (
-    <Box className="registerPage">
-      <h1> register </h1>
+    <section className="authPage">
+      <h2> Register as user or as healthcare professional:</h2>
+      <div className="regButtons">
       <Button variant="outlined" color="secondary" value='7' onClick={changeType}>User</Button>
-      <Button variant="outlined" color="secondary" value='8' onClick={changeType}>healthcare professional</Button>
-
+      <Button variant="outlined" color="secondary" value='8' onClick={changeType}>Healthcare professional</Button>
+      </div>
       {type === 8
         ?
-        <Container className="authform"> <h2>Healthcare Professional Registration</h2>
+        <Container className="authform"> <h3>Healthcare Professional Registration:</h3>
 
           <form className="form" onSubmit={onCarerSubmit}>
             <Stack spacing={2}>
@@ -206,7 +207,7 @@ const Register = () => {
           </form>
         </Container>
         :
-        <Container className="authform"><h2>User Registration</h2>
+        <Container className="authform"><h3>User Registration:</h3>
           <form className="form" onSubmit={onPatientSubmit}>
             <Stack>
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='name' label="Name" value={patientData.meta.name} onChange={handlePatientChange} />
@@ -237,7 +238,7 @@ const Register = () => {
         </Container>
       }
 
-    </Box>
+    </section>
   )
 }
 export default Register

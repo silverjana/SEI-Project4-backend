@@ -44,9 +44,9 @@ const [ filters, setFilters ] = useState({
 
 
   return (
-    <>
-      <h1> see all caregivers in a list OK + search options (WIP)</h1>
-      
+    <section className="carerPage">
+      <h2> Our Healthcare team: </h2>
+      {!isOwner && <Link className='navigatebtn' to="/">Back to Home</Link>}
       {error && <p>{error}</p>}
 
       {carersData && <CarersFilters filters={filters} setFilters={setFilters} carersData={carersData} setFilteredCarers={setFilteredCarers}  />}
@@ -58,14 +58,14 @@ const [ filters, setFilters ] = useState({
           {filteredCarers.map(carer => {
             const { id, name, qualification, specialization, location, image } = carer
             return (
-              <div className="carersDiv"  key={id}>
+              <div className="carerDiv"  key={id}>
               <Link to={`/caregivers/${id}`} >
                 <Card className="carers-card">
                   <Card.Body>
                     <img className="cardImg" loading="lazy" src={image ? image : catDoctor} alt={name} />
                     <Card.Text className="card-text">{name}, {location} <br /> {qualification} - {specialization} </Card.Text>
                     {/* {isOwner && isOwner === taskData.owner && <button className='deletebtn' value={id} onClick={onAssign}>assign Task</button>}  */}
-                    {isOwner && isOwner === taskData.owner && <button className='taskbtn' value={id} onClick={onPropose}>Propose Task</button>}                    
+                    {isOwner && isOwner === taskData.owner && <button className='taskbtn' value={id} onClick={onPropose}>send request</button>}                    
 
                   </Card.Body>
                 </Card>
@@ -77,8 +77,9 @@ const [ filters, setFilters ] = useState({
         :
         <LinearProgress color="secondary" />
       }
+      {filteredCarers.length < 1 && <p>no results, try a different search</p>}
       </Container>
-    </>
+    </section>
   )
 }
 export default CaregiversList

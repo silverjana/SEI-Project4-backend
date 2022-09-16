@@ -39,13 +39,13 @@ const MyCaregiverProfile = ({ userData }) => {
 
 
   return (
-    <Container>
+    <section className='myProfile'>
       <h2>Welcome {info.name}!</h2>
+      
+      {info.image && <img src={info.image} loading="lazy" alt='profile' />  }
+      
       <Box>
-        <img src={info.image} loading="lazy" alt='profile' />
-      </Box>
-      <Box>
-        <h3>About you:</h3>
+        <h4>About you:</h4>
         <p>{info.qualification} - {info.specialization} </p>
         <p>Location: {info.location}</p>
         {info.bio && <p>About: {info.bio}</p>}
@@ -54,7 +54,7 @@ const MyCaregiverProfile = ({ userData }) => {
         <p>You joined on {since}</p>
       </Box>
       <Box>
-        <h3>Tasks requests:</h3>
+        <h4>Tasks requests:</h4>
         {info.proposed_tasks.length > 0 ?
           <>
             {info.proposed_tasks.map(task => {
@@ -62,7 +62,7 @@ const MyCaregiverProfile = ({ userData }) => {
               return (
                 id
                   ?
-                  <div className='taskDiv' key={id}>
+                  <div className='propTaskDiv' key={id}>
                     <Link to={`/tasks/${info.id}/${id}`} >
                       <Card className="my-tasks-card">
                         <Card.Body>
@@ -81,11 +81,9 @@ const MyCaregiverProfile = ({ userData }) => {
           :
           <p>There are no tasks to show</p>
         }
-        <Button className='oksubmit' href='/'>Click here to go back to home</Button>
-
       </Box>
       <Box>
-        <h3>Assigned tasks:</h3>
+        <h4>Assigned tasks:</h4>
         {info.assigned_tasks ?
           <>
             {info.assigned_tasks.map(task => {
@@ -93,7 +91,7 @@ const MyCaregiverProfile = ({ userData }) => {
               return (
                 id
                   ?
-                  <div className='taskDiv' key={id}>
+                  <div className='asTaskDiv' key={id}>
                     <Link to={`/tasks/${info.id}/${id}`} >
                       <Card className="my-tasks-card">
                         <Card.Body>
@@ -117,7 +115,7 @@ const MyCaregiverProfile = ({ userData }) => {
         {/* <Button className='oksubmit' href='/'>Click here to go back to home</Button> */}
 
       </Box>
-    </Container>
+    </section>
   )
 }
 

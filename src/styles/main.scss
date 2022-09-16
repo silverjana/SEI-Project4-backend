@@ -1,18 +1,196 @@
-
-//  ---- FORMS  --- 
-
-// -- auth --
-
-.registerPage{
-  background-color: beige;
+.site-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  
 }
 
-.authform{
+
+// --- TEXT ---
+
+h1{
+  font-size: 5rem;
+  span{color: red;}
+  margin: 40px;
+}
+
+h2{
+  margin-top: 40px;
+  text-shadow: 2px 2px 2px #ffffff;
+}
+h3{
+  margin: 25px auto;
+}
+h4{
+  margin-top: 10px;
+}
+
+a{
+  text-decoration: none;
+  color: #222;
+}
+
+// --- BUTTONS --- 
+
+.navigatebtn{
+  border: solid 1px purple;
+  border-radius: 2px;
+  background-color: rgb(180, 0, 180);
+  color: white;
+  padding: 10px;
+  margin: 10px auto;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten(rgb(180, 0, 180), 10%);
+  }
+}
+
+.submitbtn{
+  border: solid 1px rgb(49, 147, 142);
+  border-radius: 2px;
+  background-color: rgb(45, 189, 182);
+  color: white;
+  font-size: 1rem;
+  padding: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten(rgb(45, 189, 182), 10%);
+  }
+}
+.deletebtn{
+  border: solid 1px rgb(203, 64, 111);
+  border-radius: 2px;
+  background-color: rgb(225, 42, 112);
+  color: white;
+  font-size: 1rem;
+  padding: 9px;
+  margin: 9px;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten(rgb(255, 11, 105), 12%);
+  }
+}
+.taskbtn{
+  
+    border: solid 1px rgb(49, 147, 142);
+    border-radius: 2px;
+    background-color: rgb(45, 189, 182);
+    color: white;
+    font-size: 1rem;
+    padding: 7px;
+    margin: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: lighten(rgb(45, 189, 182), 10%);
+    
+  }
+
+}
+// --- NAVBAR ---
+.navbar {
+  background-color:  rgb(178, 44, 178);
+  color: black;
+  // font-size: 1.7rem;
+  // font-family: 'Quahon', serif;
+  max-height: 8vh;
+  min-height: fit-content;
+  width: 100vw;
+  box-shadow: 1px 1px 4px 4px #222 !important;
+
+  display: flex; 
+  justify-content: space-around;
+  align-items:center;
+  a{
+    color: white;
+  }
+  
+  .brand{
+    color: aliceblue;
+  }
+  .nav-dropdown{
+    
+    display: flex;
+    padding: 4px;
+    div{
+      margin-left: 15px;
+    }
+  }
+}
+
+// --- LANDING ---
+
+.landing{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  max-width: 900px;
+  p{
+    margin-bottom: 40px;
+    padding: 0px 20px;
+  }
+  h4{
+    margin: 0;
+  }
+}
+
+// --- PRICELIST ---
+
+.pricesPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+
+  table{
+    margin: 30px;
+    th{
+      padding: 10px;
+    }
+    td{
+      padding: 13px;
+    }
+  }
+}
+
+
+//?  ---- FORMS  --- 
+
+// --- REGISTER / login---
+
+.authPage{
+  margin: 30px 0 60px;
+  width: 60%;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-color: rgb(230, 248, 249);
+  box-shadow: 1px 1px 4px 4px rgba(174, 242, 242, 0.779);
+  border-radius: 5px;
+  .regButtons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    button{
+      margin: auto 20px;
+      border-radius: 3px;
+      text-transform: none;
+    }
+  }
+}
+
+.authform{
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   div{
     margin: 4px 0;
   }
@@ -25,26 +203,122 @@ form{
   
 }
 
-.submitbtn{
-  margin:20px 0 50px;
+// --- CREATE TASK--- 
+// form above
+
+// --- MY PROFILES ---
+
+.myProfile{
+  margin-top: 30px;
+  margin-bottom: 59px;
+  padding: 20px;
+  width: 70%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(84, 222, 237, 0.779) ;
+  border-radius: 5px;
+  .MuiBox-root{
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    background-color: white;
+    margin: 20px 0;
+    padding: 15px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+
+    .propTaskDiv{
+      margin: 20px;
+      background-color:  rgb(255, 250, 116);
+      .card-body{
+        padding-top: 10px;
+      }      
+      .card-title{
+        font-weight: 600;
+      }
+    }
+    .asTaskDiv{
+      margin: 20px;
+      background-color: rgb(152, 255, 169);
+      border-radius: 3px;
+      .card-body{
+        padding-top: 10px;
+      }
+      .card-title{
+        font-weight: 600;
+      }
+    }
+    .taskDiv{
+      margin: 20px;
+      background-color: rgb(152, 255, 169);
+      .card-body{
+        padding-top: 10px;
+      }
+      .card-title{
+        font-weight: 600;
+      }
+    }
+  }
 }
+
+// --- SINGLE TASK ---
+.taskPage{
+  margin-top: 30px;
+  margin-bottom: 59px;
+  padding: 20px;
+  width: 75%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h4{
+    line-height: 2;
+    font-size: 1.3rem;
+    font-weight: 400;
+    span{
+      font-weight: 600;
+    }
+  }
+  .btnGroup{
+    display: flex;
+    justify-content: center;
+    .navigatebtn{
+      margin: 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+
 
 // --- CARER LIST ---
 
+.carerPage{
+  background-color: rgba(174, 242, 242, 0.878);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100%;
+  border-radius: 3px;
+}
 .carerList{
-  max-width: 90%;
+  width: 84%;
+  max-width: 1100px;
   display:flex;
   flex-wrap: wrap;
-  background-color: azure;
   align-items: center;
   justify-content: space-between;
-  
+  margin-bottom: 30px;
 }
-
-.carersDiv{
-  max-width: 30%;
-  background-color: antiquewhite;
+.carerDiv{
+  max-width: 31%;
+  background-color: rgb(255, 255, 255);
   max-height: fit-content;
+  min-height: max-content;
   margin-bottom: 20px;
 }
 .card{ 
@@ -55,13 +329,36 @@ form{
   text-align: center;
   p{
     margin: 0;
-    padding: 10px;
+    padding: 8px;
     line-height: 1.5;
   }
 }
 .cardImg{
   max-width: 100%;
+  min-width: 100%;
+  max-height: 75%;
+  min-height: 75%;
+  
 }
+
+.filters{
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-around;
+  max-width: 40%;
+  min-width: 400px;
+  
+  select{
+    padding: 10px;
+    border-radius: 4px;
+    
+    
+  } 
+}
+
+
+
+
 
 // --- FOOTER ---
 
@@ -70,16 +367,17 @@ footer {
   max-height: 100px;
   bottom: 0;
   width: 100vw;
-  background-color: rgb(217, 92, 255);
+  background-color:  rgba(51, 198, 203, 0.835);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
 
   p {
-    align-self: center;
+    
     margin: 10px;
-    color: #d5d5d5;
+    color: #635168;
 
     a {
-      color: rgb(252, 254, 209);
+      color: rgb(167, 55, 232);
     }
   }
 }

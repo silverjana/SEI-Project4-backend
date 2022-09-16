@@ -36,13 +36,13 @@ const UserProfile = () => {
 
   return (
     <>
-      <h1> userprofile </h1>
+    
       {error && {error}}
       {userData
       ?
       userData.content_type === 7 ? <MyPatientProfile userData={userData}  /> : <MyCaregiverProfile userData={userData}  />
       :
-      <p>Plerase log in to see this page <Button className='navigatebtn' href='/login'>Click here to log in</Button></p>
+      <p>Please log in to see this page <Button className='navigatebtn' href='/login'>Click here to log in</Button></p>
       }
       
       

@@ -71,9 +71,9 @@ const CreateTask = () => {
   
 
   return (
-    <>
+    <section className="authPage">
       <Container className="authform">
-        <h1> create a new task as a logged in patient </h1>
+        <h2>Create a new task</h2>
         <form className="form" onSubmit={onSubmit}>
           {error && <div className='error-mex'>{error}</div>}
           <TextField multiline rows={3} className="form-input" variant="filled" name='description' label="Description" value={data.description} onChange={handleChange} />
@@ -93,12 +93,12 @@ const CreateTask = () => {
             <FormControlLabel value="nurse" name="treatment" control={<Radio color="secondary" />} label="Nurse" />
             <FormControlLabel value="ENT" name="treatment" control={<Radio color="secondary" />} label="Ears, nose and throat" />
           </RadioGroup>
-          <Button variant="outlined" type='submit' className='submitbtn'>Create</Button>
+          <button variant="outlined" type='submit' className='submitbtn'>Create</button>
           {message && <button className='okmessage'>{message}</button>}
         </form>
       </Container>
 
-    </>
+    </section>
   )
 }
 export default CreateTask

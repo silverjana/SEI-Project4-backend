@@ -28,10 +28,11 @@ const CarersFilters = ({ filters, setFilters, carersData, setFilteredCarers }) =
   const specializations = [ ...new Set(carersData.map(carer => carer.specialization))]
 
   return (
-    <div className="filters mb-4 mt-4 d-flex">
+    <div className="filters">
       {/* Region dropdown */}
+      <p>Filters:</p>
       <select onChange={handleChange} name="specialization" value={filters.specialization}>
-        <option value="All">All</option>
+        <option selected={true} value="All">All specializations</option>
         { specializations.map(specialization => <option key={specialization} value={specialization}>{specialization}</option>)}
       </select>
       {/* Search field */}

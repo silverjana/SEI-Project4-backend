@@ -5,6 +5,7 @@ import API_URL from '../config.js'
 import { Box } from "@mui/material"
 import { Button } from "react-bootstrap"
 import {LinearProgress} from "@mui/material"
+import { Link } from "react-router-dom"
 
 import { getToken, getPayload } from '../helpers/auth'
 
@@ -97,29 +98,30 @@ const SingleTask = () => {
 
   return (
     <>
-      <h1> See single task as owner OK + invited logged in professional </h1>
       {taskData
         ?
-        <>
-          <button className='btn oksubmit' onClick={handleClick}>Click here to go back</button>
+        <section className="taskPage">
+          
           <Box>
-            <p>{taskData.status} task created on {taskData.created_at.split('T')[0]}. <br />
+            <h4><span>{taskData.status} task created on {taskData.created_at.split('T')[0]}.</span> <br />
               Service required: {taskData.treatment} - {taskData.frequency} <br />
               Description: {taskData.description} <br />
               assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
-              {isOwner && taskData.possible_carers > 0 ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</p>
+              {isOwner && taskData.possible_carers > 0 ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
           </Box>
           {isOwner === taskData.owner &&
             <>
-              <Button className='navigatebtn' href={`/tasks/${patientId}/${taskId}/update`} >Edit task</Button>
-              
+              <div className="btnGroup">
+                <button className='navigatebtn' onClick={handleClick}>Go back</button>
+                <Link className='navigatebtn' to={`/tasks/${patientId}/${taskId}/update`} >Edit task</Link>
+              </div>
               <CaregiversList  isOwner={isOwner} taskData={taskData} onPropose ={onPropose}/>
               {/* <CaregiversList  isOwner={isOwner} taskData={taskData} onAssign={onAssign}/> */}
               
             </>
           }
 
-        </>
+        </section>
         :
         <LinearProgress color="success" />
       }

@@ -112,9 +112,9 @@ const UpdateTask = () => {
     }
   }
   return (
-    <>
+    <section className="authPage">
       <Container className="authform">
-        <h1> Edit task </h1>
+        <h2> Edit task </h2>
         <form className="form" onSubmit={onSubmit}>
           {error && <div className='error-mex'>{error}</div>}
           <TextField multiline error={error ? true : false} rows={3} className="form-input" variant="filled" name='description' label="Description" value={data.description} onChange={handleChange} />
@@ -139,7 +139,7 @@ const UpdateTask = () => {
         </form>
       </Container>
 
-    </>
+    </section>
   )
 }
 

@@ -64,16 +64,13 @@ const Login = () => {
   }
 
   return (
+    <section className='authPage'>
     <Container className="authform">
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form className="form" onSubmit={onSubmit}>
-        {/*  <RadioGroup row className="login-radio-buttons-group" onClick={changeType} value={type}>
-        <FormControlLabel value="7" name="type" control={<Radio color="secondary" />} label="User" />
-        <FormControlLabel value="8" name="type" control={<Radio color="secondary" />} label="Healthcare Professional" />
-      </RadioGroup> */ }
         {error && <div className='error-mex'>{error}</div>}
-        <TextField required error={error ? true : false} className="form-input" variant="standard" name='email' label="Email" value={userData.email} onChange={handleChange} />
-        <TextField required error={error ? true : false} className="form-input" variant="standard" type="password" name='password' label="Password" value={userData.password} onChange={handleChange} />
+        <TextField required error={error ? true : false} className="form-input" variant="filled" name='email' label="Email" value={userData.email} onChange={handleChange} />
+        <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={userData.password} onChange={handleChange} />
         <button type='submit' className='submitbtn' >Login</button>
         {login && 
           <>
@@ -83,6 +80,7 @@ const Login = () => {
         }
       </form>
     </Container>
+    </section>
   )
 }
 
