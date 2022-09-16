@@ -84,7 +84,7 @@ const MyCaregiverProfile = ({ userData }) => {
       </Box>
       <Box>
         <h4>Assigned tasks:</h4>
-        {info.assigned_tasks ?
+        {info.assigned_tasks.length > 0 ?
           <>
             {info.assigned_tasks.map(task => {
               const { id, start_date, status, frequency, treatment } = task
@@ -105,14 +105,12 @@ const MyCaregiverProfile = ({ userData }) => {
 
                   :
                   <LinearProgress color="success" />
-
               )
             })}
           </>
           :
           <p>There are no tasks to show</p>
         }
-        {/* <Button className='oksubmit' href='/'>Click here to go back to home</Button> */}
 
       </Box>
     </section>

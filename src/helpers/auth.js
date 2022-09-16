@@ -19,4 +19,14 @@ export const getPayload = () => {
   return JSON.parse(Buffer.from(splitToken[1], 'base64'))
 }
 
-
+// False if the token is invalid or expired
+export const userIsAuthenticated = () => {
+  const payload = getPayload()
+  if (!payload) return 
+  // If payload is truthy, check the expiry date is in the future
+  const currentTime = Math.round(Date.now() / 1000) // Date.now() returns back the unix timestamp in miliseconds, the exp is in seconds so we divide it by 1000
+  console.log('EXPIRY DATE  ->', payload.exp)
+  console.log('CURRENT TIME ->', currentTime)
+  console.log('IS EXPIRY DATE IN FUTURE', currentTime < payload.exp)
+  return currentTime < payload.exp
+}

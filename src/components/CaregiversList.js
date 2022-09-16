@@ -5,6 +5,8 @@ import { Card, Container } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 import catDoctor from '../images/catDoctor.jpeg'
 
+
+
 //? Filter
 import CarersFilters from './CarersFilters.js'
 
@@ -33,14 +35,18 @@ const CaregiversList = ({isOwner, taskData, onPropose}) => {
     getData()
   }, [])
 
+
+
+
+
 //! FILTER ---
 
-const [ filteredCarers, setFilteredCarers ] = useState([])
+  const [ filteredCarers, setFilteredCarers ] = useState([])
 
-const [ filters, setFilters ] = useState({
-  searchLocation: '',
-  specialization:'All',
-})
+  const [ filters, setFilters ] = useState({
+    searchLocation: '',
+    specialization:'All',
+  })
 
 
   return (

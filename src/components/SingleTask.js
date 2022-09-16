@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
 import API_URL from '../config.js'
 import { Box } from "@mui/material"
-import { Button } from "react-bootstrap"
+
 import {LinearProgress} from "@mui/material"
 import { Link } from "react-router-dom"
+
+
 
 import { getToken, getPayload } from '../helpers/auth'
 
@@ -78,6 +80,9 @@ const SingleTask = () => {
 
   const onPropose = async (event) => {
     event.preventDefault()
+
+  
+
     const req =  event.target.value
     console.log('carerid ',req)
     console.log('taskid:', taskId)
@@ -87,6 +92,7 @@ const SingleTask = () => {
       //save the response
       setMessage(res.data)
       console.log(" res ", res.data)
+
       //go to 
       //navigate(`/tasks/${patientId}/${taskId}`)
 
@@ -95,6 +101,8 @@ const SingleTask = () => {
       setError(error.message)
     }
   }
+
+  
 
   return (
     <>
@@ -107,7 +115,7 @@ const SingleTask = () => {
               Service required: {taskData.treatment} - {taskData.frequency} <br />
               Description: {taskData.description} <br />
               assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
-              {isOwner && taskData.possible_carers > 0 ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
+              {isOwner && taskData.possible_carers.length > 0 && !taskData.assigned_carer ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
           </Box>
           {isOwner === taskData.owner &&
             <>

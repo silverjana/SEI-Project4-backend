@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
 import API_URL from '../config.js'
-import { Button } from "@mui/material"
+
+import { Box } from "@mui/material"
 
 const CaregiverProfile = () => {  
   //when coming back to page, scroll to top
@@ -34,16 +35,38 @@ const CaregiverProfile = () => {
     getData()
   }, [])
 
-  return (
-    <>
-      <h1> see caregiver profile as logged in user ( any) </h1>
-      {error && <p>{error}</p>}
-      {userData 
-      ? 
-      <p>DATA IS HERE!</p> 
-      :
-      <p>Loading...</p>}
-    </>
-  )
+//   return (
+// <>
+//       {userData
+//         ?
+//         <section className="taskPage">
+          
+//           <Box>
+//             <h4><span>}{userData.na}</span> <br />
+//               Service required: {taskData.treatment} - {taskData.frequency} <br />
+//               Description: {taskData.description} <br />
+//               assigned carer: {taskData.assigned_carer ? taskData.assigned_carer : 'still unassigned'} <br />
+//               {isOwner && taskData.possible_carers.length > 0 && !taskData.assigned_carer ? 'Somone will shortly answer to your request!' : 'Start sending requests!'}</h4>
+//           </Box>
+//           {isOwner === taskData.owner &&
+//             <>
+//               <div className="btnGroup">
+//                 <button className='navigatebtn' onClick={handleClick}>Go back</button>
+//                 <Link className='navigatebtn' to={`/tasks/${patientId}/${taskId}/update`} >Edit task</Link>
+//               </div>
+//               <CaregiversList  isOwner={isOwner} taskData={taskData} onPropose ={onPropose}/>
+//               {/* <CaregiversList  isOwner={isOwner} taskData={taskData} onAssign={onAssign}/> */}
+              
+//             </>
+//           }
+
+//         </section>
+//         :
+//         <LinearProgress color="success" />
+//       }
+//       {error && <p>{error}</p>}
+
+//     </>
+//   )
 }
 export default CaregiverProfile

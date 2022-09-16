@@ -88,10 +88,10 @@ const Register = () => {
 
   //  --  CAREGIVER  --  
 
-    //--- import picture from upload --
+  //--- import picture from upload --
 
-    const [imageData, setImageData] = useState('')
-    console.log('image:', imageData.image)
+  const [imageData, setImageData] = useState('')
+  console.log('image:', imageData.image)
 
   //get / set patient data values
   const [carerData, setCarerData] = useState({
@@ -137,7 +137,7 @@ const Register = () => {
     event.preventDefault()
     try {
       //API req POST to register
-      console.log('carer data just before sending',carerData)
+      console.log('carer data just before sending', carerData)
       await axios.post(`http://127.0.0.1:8000/auth/register/${type}/`, carerData)
       //go to 
       navigate("/login")
@@ -161,8 +161,8 @@ const Register = () => {
     <section className="authPage">
       <h2> Register as user or as healthcare professional:</h2>
       <div className="regButtons">
-      <Button variant="outlined" color="secondary" value='7' onClick={changeType}>User</Button>
-      <Button variant="outlined" color="secondary" value='8' onClick={changeType}>Healthcare professional</Button>
+        <Button variant="outlined" color="secondary" value='7' onClick={changeType}>User</Button>
+        <Button variant="outlined" color="secondary" value='8' onClick={changeType}>Healthcare professional</Button>
       </div>
       {type === 8
         ?
@@ -192,8 +192,8 @@ const Register = () => {
               </RadioGroup>
 
               {/* <TextField className="form-input" variant="filled" name='image' label="Image CLOUDINARY" value={carerData.meta.image} onChange={handleCarerChange} /> */}
-              
-              <UploadImage name='image' setImageData={setImageData} data={imageData}/>
+
+              <UploadImage name='image' setCarerData={setCarerData} carerData={carerData} />
 
               <TextField multiline rows={2} className="form-input" variant="filled" name='bio' label="About you" value={carerData.meta.bio} onChange={handleCarerChange} />
 
@@ -215,8 +215,8 @@ const Register = () => {
               <TextField required error={error ? true : false} className="form-input" variant="filled" name='email' label="Email" value={patientData.email} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password' label="Password" value={patientData.password} onChange={handlePatientChange} />
               <TextField required error={error ? true : false} className="form-input" variant="filled" type="password" name='password_confirmation' label="Confirm Password" value={patientData.password_confirmation} onChange={handlePatientChange} />
-              <TextField required error={error ? true : false} className="form-input" variant="filled" type ='date' name='date_of_birth' label="Date of birth" value={patientData.meta.date_of_birth} onChange={handlePatientChange} />
-              <FormLabel required  id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <TextField required error={error ? true : false} className="form-input" variant="filled" type='date' name='date_of_birth' label="Date of birth" value={patientData.meta.date_of_birth} onChange={handlePatientChange} />
+              <FormLabel required id="demo-radio-buttons-group-label">Gender</FormLabel>
               <RadioGroup row name="row-radio-buttons-group" onChange={handlePatientChange} value={patientData.meta.gender}>
                 <FormControlLabel value="female" name="gender" control={<Radio color="secondary" />} label="Female" />
                 <FormControlLabel value="male" name="gender" control={<Radio color="secondary" />} label="Male" />

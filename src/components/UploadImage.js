@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Container, FormGroup } from "react-bootstrap"
 
-const UploadImage = ({setImageData, imageData}) => {
+const UploadImage = ({setCarerData, carerData}) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -21,7 +21,7 @@ const UploadImage = ({setImageData, imageData}) => {
     const File = await res.json()
     console.log('secure url', File.secure_url)
     
-    setImageData({ ...imageData, image: File.secure_url })
+    setCarerData({ ...carerData, image: File.secure_url })
     setLoading(false)
   }
   return ( <div>
@@ -30,7 +30,7 @@ const UploadImage = ({setImageData, imageData}) => {
       <FormGroup>
         <input type="file" name="file" placeholder="Upload image here" onChange={Upload} />
         <br />
-        {loading ? (<h3>Loading...</h3>) : imageData ? <img src={imageData.image} style={{width: "200px"}} alt=''/> : <p></p>}
+        {loading ? (<h3>Loading...</h3>) : carerData ? <img src={carerData.image} style={{width: "200px"}} alt=''/> : <p></p>}
       </FormGroup>
     </Container>
   </div>)
