@@ -39,6 +39,7 @@ class TaskDetailView(APIView):
 
     # delete a task
     def delete(self, request, pk):
+        print('DELETE', pk)
         task_to_delete = self.get_task(pk)
         print('taskid:', pk)
 
@@ -53,13 +54,29 @@ class TaskDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)  # cant send body
 
     def put(self, request, pk):
-        # ! changed serializer from taskcarerS
+        # ! next thing to do - will not edit proposed tasks
+        # # > b = Blog.objects.get(id=1) GET TASK from 'params'
+        # task_to_update = self.get_task(pk=pk)
+
+        # try:
+        # # >>> e = Entry.objects.get(id=234) GET new task
+        #     updated_task = request.data
+        #     print(updated_task)
+        #     # >>> b.entry_set.add(e) # Associates Entry e with Blog b.
+        #     # task_to_update.add()
+
+        #     return Response(updated_task.data, status=status.HTTP_202_ACCEPTED)
+        # except Exception as e:
+        #     print(e)
+        #     return Response(str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
         task_to_update = self.get_task(pk)
         # when updating: pass both existing data and req data into the serializer
         updated_task = TaskSerializer(task_to_update, data=request.data)
         try:
             updated_task.is_valid(True)  # validate new data
-            updated_task.save()  #  if valid, save
+            updated_task.save()  #  if valid, save
             return Response(updated_task.data, status=status.HTTP_202_ACCEPTED)
         except Exception as e:
             print(e)
@@ -113,7 +130,7 @@ class TaskProposeView(APIView):
             print('request data:', request.data)
             print('request data id:', request.data.get('id'))
             carer = Carer.objects.get(pk=request.data.get('id'))
-            print('carer:',carer)
+            print('carer:', carer)
 
             # >>> b.entry_set.add(e) # Associates Entry e with Blog b.
             task.possible_carers.add(carer)
@@ -143,13 +160,13 @@ class TaskAssignView(APIView):
             task = self.get_task(pk=pk)
             print('task: ', task)
             print("request user object id ->", request.user.object_id)
-            #print(request.data)
-            serialized_task = TaskSerializer(task, {'assigned_carer': request.user.object_id, 'possible_carers': []}, partial=True)
+            # print(request.data)
+            serialized_task = TaskSerializer(
+                task, {'assigned_carer': request.user.object_id, 'possible_carers': []}, partial=True)
             serialized_task.is_valid(True)
             serialized_task.save()
 
             print('ser.task data:', serialized_task.data)
-
 
             return Response(serialized_task.data, status=status.HTTP_202_ACCEPTED)
         except Exception as e:
