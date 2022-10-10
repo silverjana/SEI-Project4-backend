@@ -10,7 +10,7 @@ The Healthcare professionals will see the new task in their profile, open it for
 Once the first one accepts, the task changes status and is not available anymore for the other professionals.
 
 ### Deployment link
-
+https://project4-click-and-care.herokuapp.com/  
 
 ### Timeframe & Working Team
 We had 8 days for this solo project.
@@ -51,10 +51,13 @@ Be deployed online so it's publicly accessible
  ## Planning
 
 First I sketched an Excalidraw plan with the pages needed, the interactions between them and some user journey mapping:  
+<img src="https://i.imgur.com/9Ox0VVt.png" alt="screenshot" width="1050"/>
 
 I also planned what API requests and endpoints each page needed:  
+<img src="https://i.imgur.com/GjH9PpA.png" alt="screenshot" width="450"/>
 
 And a diagram of the database:  
+<img src="https://i.imgur.com/kMp1hOp.png" alt="screenshot" width="750"/>
 
 I already included some stretch goals, but I like to include them in my plan, to know where to add them if I reach them.  
 
@@ -63,12 +66,14 @@ email and password, and then two Patient/Carer models with all the personal info
 along with the content-type id, to know in which table to look for that id. 
 
 I also set up a Kanban board (visual project management) dividing the work in front/back end and single tasks:
+<img src="https://i.imgur.com/iJzTVdU.jpeg" alt="screenshot" width="750"/>
 
 ## Process
 
 **Day 1**
 
-Front end: I created a React app with router and components, with a single h1 to check functionality.
+Front end: I created a React app with router and components, with a single h1 to check functionality.  
+<img src="https://i.imgur.com/pbH8IOP.png" alt="screenshot" width="450"/>
 
 Back end: Created Django project and started on the authentication app, with User model, serializer, register & login paths and views.
 
@@ -126,55 +131,60 @@ Added TaskProposeView and TaskAssignView to update the task when the patient pro
 
 Front end: Fixed last details like title, headlines and text on buttons. Completed Navbar and single caregiver page.  
 Styled buttons, messages, Navbar, Landing, profile pages, task pages.
-I changed the way I compared the current user with the task owner in SingleTask using payload as it’s more secure:  
-The carer profile image url was still not saving properly, so I set it directly from the sub component handling the cloudinary upload:  
+I changed the way I compared the current user with the task owner in SingleTask using payload as it’s more secure:     
+<img src="https://i.imgur.com/qb74VEJ.png" alt="screenshot" width="750"/>
+
+The carer profile image url was still not saving properly, so I set it directly from the sub component handling the cloudinary upload:   
+<img src="https://i.imgur.com/kQvZOoW.png" alt="screenshot" width="450"/>
 
 Back end: Fixed last mistakes like forgotten brackets, and tried to update the single task put endpoint as there are issues when trying to edit an already proposed task, but did not have time to work it out.
 
 
 **Deployment**
-I moved the front end repository as client in the back end one using this:
+I moved the front end repository as client in the back end one using this:  
+<img src="https://i.imgur.com/ha8tnSq.png" alt="screenshot" width="450"/>
 
 Unfortunately I did not manage to deploy successfully to Heroku, and even the teacher had a really hard time trying to understand why, as locally it works fine. 
 
 
 ## Final Product
-Landing:
+Landing:   
+<img src="https://i.imgur.com/KugCkYm.png" alt="screenshot" width="750"/>
 
+Registration:   
+<img src="https://i.imgur.com/YGEwL1z.png" alt="screenshot" width="450"/>
+<img src="https://i.imgur.com/KyFacUu.png" alt="screenshot" width="450"/>
 
-Registration:
+User profile page as carer or patient:   
+<img src="https://i.imgur.com/Zi5DBtS.png" alt="screenshot" width="450"/>
+<img src="https://i.imgur.com/m7RTekB.png" alt="screenshot" width="450"/>
 
+Single task page seen as patient:   
+<img src="https://i.imgur.com/ripswlD.png" alt="screenshot" width="750"/>
 
-User profile page as carer or patient:
-      
-
-Single task page seen as patient:
-
-
-<img src="" alt="screenshot" width="750"/>
-<img src="" alt="screenshot" width="750"/>
-<img src="" alt="screenshot" width="750"/>
 
 ### Wins and blockers 
 I am so proud I managed to make the 2 different kinds of user work, along with the proposing and accepting of the task back and forth between the users, as in class we just practised CRUD functionality with only one user. It also required a bit more time to set up than I was expecting, and I got some complicated errors because I was doing something completely new with a language and framework I just learned, so I did not manage to reach the stretch goals and the styling is fairly simple. I usually like my project to have a more polished look, but this time the styling had to yield to functionality.
 
-First I had to create the User extending the AbstractUser class, with content_type differentiating the kind of user, and object_id linking to the specific patient/carer:
+First I had to create the User extending the AbstractUser class, with content_type differentiating the kind of user, and object_id linking to the specific patient/carer:  
+<img src="https://i.imgur.com/qFAxcvr.png" alt="screenshot" width="750"/>
 
 In the patient/carer model I added it as user = GenericRelation(User).
 
-In the Register component I added buttons to select user type, and a ternary to show the right form.
+In the Register component I added buttons to select user type, and a ternary to show the right form.  
+<img src="https://i.imgur.com/NMMBp3s.png" alt="screenshot" width="750"/>
 
+Having a meta key in the data useState I had to spread and add an if statement to the handleChange function:  
+<img src="https://i.imgur.com/s6qKOnu.png" alt="screenshot" width="450"/>
 
-Having a meta key in the data useState I had to spread and add an if statement to the handleChange function:
+In the back end I needed to serialise and save first the meta as patient or carer, then add the id to the user to validate and save.  
+<img src="https://i.imgur.com/C4ejp9O.png" alt="screenshot" width="450"/>
 
+This is how I added the One-to-many and Many-to-many relationships of the tasks:  
+<img src="https://i.imgur.com/zhkUP75.png" alt="screenshot" width="450"/>
 
-In the back end I needed to serialise and save first the meta as patient or carer, then add the id to the user to validate and save.
-
-This is how I added the One-to-many and Many-to-many relationships of the tasks:
-
-
-
-I am also happy I got to practice new ways to write edit endpoints:
+I am also happy I got to practice new ways to write edit endpoints:  
+<img src="https://i.imgur.com/q8ojzTA.png" alt="screenshot" width="450"/>
 
 ### Bugs and future features
 
@@ -185,6 +195,14 @@ Then I would like to update the edit task endpoint, as the current version does 
 I also did not master the display of the errors coming back from the back end, as I found selecting the right data to display in the error message fairly convoluted and time consuming.
 
 There are also some Bugs: when a patient deletes a task, a bad gateway error appears even when successfully deleted and the carer list CSS is not great, as the cards don’t stay the same size with different profile pictures.
+
+###  Key learnings 
+
+This was the first project we did after learning Python, so I practised coding something where I already knew the logic in JavaScript, understanding better what changes and what stays the same between different programming languages.
+
+Choosing to have more types of users also gave me a better appreciation of what shape the data sent to the back end can have, and of how that data can be processed there.
+
+The structure of the Application gave me also the opportunity to practice with One-to-many and Many-to-many relationships with a SQL database.
 
 
 
