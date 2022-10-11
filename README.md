@@ -82,7 +82,10 @@ Back end: Created Django project and started on the authentication app, with Use
 
 Front end: Started with the Register components and the two forms on it.  
 
-Back end: Finished the authentication app adding the JWT check. Created the patients app with model, common serializer and view.   
+Back end: Finished the authentication app adding the JWT check.   
+<img src="https://i.imgur.com/9B8BVIK.png" alt="screenshot" width="750"/>  
+
+Created the patients app with model, common serializer and view.   
 Modified register view to use a different serializer for the User depending if it’s a patient or a Healthcare professional.
 
 **Day 3**
@@ -95,7 +98,8 @@ Back end: RegisterView: I realised that to register with 2 users I had to separa
 
 Front end: Started on Header, completed Footer and Login. In Register I fixed the data to send in the axios request adding the meta field. Both Login and Register work.
 Created the UserProfile page and the sub component for PatientProfile, with working axios requests.
-Set up a Cloudinary account and added the UploadImage sub component to upload the carer profile picture.
+Set up a Cloudinary account and added the UploadImage sub component to upload the carer profile picture.  
+<img src="https://i.imgur.com/64rfZ3h.png" alt="screenshot" width="750"/>  
 
 Back end: Created Carers app, connected the registerView, added populated serializers and profileView to get all the users data on the profile page.
 
@@ -104,12 +108,18 @@ Back end: Created Carers app, connected the registerView, added populated serial
 Front end: Renamed some Router paths for naming coherence, completed the CarerProfile sub component and the CreateTask page.   
 Started on the SingleTask component. Fixed some issues on UploadImage and userProfile.    
 
-Back end: Created Task app, with owner and assigned_carer as One-to-Many fields and possible_carers as Many-to-Many field in the Task model and populated the patient/carer serializers with the tasks. 
+Back end: Created Task app, with owner and assigned_carer as One-to-Many fields and possible_carers as Many-to-Many field in the Task model and populated the patient/carer serializers with the tasks.   
+<img src="https://i.imgur.com/pnOCpih.png" alt="screenshot" width="750"/>  
+
 Started adding Permission classes to views.
 
 **Day 6**
 
-Front end: Fixed some small errors like a wrong useParams variable name or misspellings. In CreateTask I changed how I save the owner value, from getting it from params in the front end to getting it from current user data in task views, as it is more secure.
+Front end: Fixed some small errors like a wrong useParams variable name or misspellings. In CreateTask I changed how I save the owner value, from getting it from params in the front end to getting it from current user data in task views, as it is more secure.  
+Front end:     <img src="https://i.imgur.com/OrqRISN.png" alt="screenshot" width="450"/>
+
+Back end:      <img src="https://i.imgur.com/h36EXC7.png" alt="screenshot" width="750"/>    
+
 Added some navigation buttons and worked on data display in PatientProfile and CarersList, and completed SingleTask and UpdateTask. 
 Started on the SCSS styling forms, Footer and CarerList
 The carer’s profile image would not save in the meta data and then in the DB, so I changed the way I set the props and added the imageData useState.  
